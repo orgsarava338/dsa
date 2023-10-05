@@ -1,4 +1,3 @@
-import { nextTick } from "process";
 import Node from "./Node";
 
 interface ILinkedList<T> {
