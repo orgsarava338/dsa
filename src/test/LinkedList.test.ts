@@ -14,7 +14,7 @@ describe("Linked Lists Tests", () => {
   });
 
   test("append a value", () => {
-    list.append(2);
+    list.append(values[1]);
     expect(list.toArray()).toEqual([values[0], values[1]]);
   });
 
