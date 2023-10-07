@@ -1,5 +1,5 @@
-import DoubleLinkedList from "./src/list/doubly-linked-list";
-import LinkedList from "./src/list/singly-linked-list";
+import DoubleLinkedList from "./src/list/doubly-linked-list/DoublyLinkedList";
+import LinkedList from "./src/list/singly-linked-list/SinglyLinkedList";
 
 const list = new DoubleLinkedList(1);
 

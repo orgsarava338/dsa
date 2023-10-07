@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "bun:test";
-import SinglyLinkedList from "../src/list/singly-linked-list";
+import SinglyLinkedList from "../src/list/singly-linked-list/SinglyLinkedList";
 
 describe("SinglyLinkedList Tests", () => {
   let list: SinglyLinkedList<number>;

@@ -1,25 +1,7 @@
 import Node from "./Node";
+import { ListMethods } from "../Methods";
 
-interface ILinkedList<T> {
-  head: Node<T> | null;
-  size: number;
-
-  append(value: T): void;
-  prepend(value: T): void;
-  insertAfter(after: T, value: T): void;
-  insertBefore(before: T, value: T): void;
-  find(value: T): Node<T> | null;
-  delete(value: T): void;
-  clear(): void;
-  isEmpty(): Boolean;
-  toArray(): T[];
-  getHead(): T | null | undefined;
-  getTail(): T | null | undefined;
-  reverse(): void;
-  print(): void;
-}
-
-export default class LinkedList<T> implements ILinkedList<T> {
+export default class LinkedList<T> implements ListMethods<T> {
   head: Node<T> | null;
   size: number;
 
@@ -38,7 +20,6 @@ export default class LinkedList<T> implements ILinkedList<T> {
       }
       current.next = node;
     }
-
     this.size++;
   }
 

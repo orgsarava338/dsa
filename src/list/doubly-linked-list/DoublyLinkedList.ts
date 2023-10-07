@@ -1,26 +1,7 @@
 import Node from "./Node";
+import { ListMethods } from "../Methods";
 
-interface IDoublyLinkedList<T> {
-  head: Node<T> | null;
-  tail: Node<T> | null;
-  size: number;
-
-  append(value: T): void;
-  prepend(value: T): void;
-  insertAfter(after: T, value: T): void;
-  insertBefore(before: T, value: T): void;
-  find(value: T): Node<T> | null;
-  delete(value: T): void;
-  clear(): void;
-  isEmpty(): Boolean;
-  toArray(): T[];
-  getHead(): T | null | undefined;
-  getTail(): T | null | undefined;
-  reverse(): void;
-  print(): void;
-}
-
-export default class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
+export default class DoublyLinkedList<T> implements ListMethods<T> {
   head: Node<T> | null;
   tail: Node<T> | null;
   size: number;
@@ -36,23 +17,27 @@ export default class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
     else {
       node.prev = this.tail;
       if (this.tail) this.tail.next = node;
-      else throw new Error("this don't have tail");
       this.tail = node;
     }
     this.size++;
   }
+
   prepend(value: T): void {
     throw new Error("Method not implemented.");
   }
+
   insertAfter(after: T, value: T): void {
     throw new Error("Method not implemented.");
   }
+
   insertBefore(before: T, value: T): void {
     throw new Error("Method not implemented.");
   }
+
   find(value: T): Node<T> | null {
     throw new Error("Method not implemented.");
   }
+  
   delete(value: T): void {
     throw new Error("Method not implemented.");
   }
@@ -83,7 +68,7 @@ export default class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
   reverse(): void {
     throw new Error("Method not implemented.");
   }
-  
+
   print(): void {
     console.log({ list: this.toArray(), size: this.size });
   }

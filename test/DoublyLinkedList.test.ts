@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "bun:test";
-import DoublyLinkedList from "../src/list/doubly-linked-list";
+import DoublyLinkedList from "../src/list/doubly-linked-list/DoublyLinkedList";
 
 describe("DoublyLinkedList Tests", () => {
   let list: DoublyLinkedList<number>;

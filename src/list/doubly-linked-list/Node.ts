@@ -1,13 +1,6 @@
-interface INode<T> {
-  value?: T | null;
-  next: Node<T> | null;
-  prev: Node<T> | null;
+import { NodeMethods } from "../Methods";
 
-  toArray(): T[];
-  print(): void;
-}
-
-export default class Node<T> implements INode<T> {
+export default class Node<T> implements NodeMethods<T> {
   value?: T | null;
   next: Node<T> | null;
   prev: Node<T> | null;
