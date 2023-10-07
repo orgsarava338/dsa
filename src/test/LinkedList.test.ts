@@ -16,6 +16,61 @@ describe("Linked Lists Tests", () => {
   test("append a value", () => {
     list.append(values[1]);
     expect(list.toArray()).toEqual([values[0], values[1]]);
+    expect(list.size).toBe(2);
+  });
+
+  test("prepand a value", () => {
+    list.prepend(values[1]);
+    expect(list.toArray()).toEqual([values[1], values[0]]);
+    expect(list.size).toBe(2);
+
+    list.prepend(values[2]);
+    expect(list.toArray()).toEqual([values[2], values[1], values[0]]);
+    expect(list.size).toBe(3);
+  });
+
+  test("insert after a value", () => {
+    list.insertAfter(values[0], values[1]);
+
+    expect(list.toArray()).toEqual([values[0], values[1]]);
+    expect(list.size).toBe(2);
+
+    list.append(values[2]);
+
+    list.insertAfter(values[2], values[3]);
+
+    expect(list.toArray()).toEqual(
+      values.filter((e) => (e !== values[4] ? e !== values[5] : false))
+    );
+    expect(list.size).toBe(4);
+  });
+
+  test("insert before a value", () => {
+    list.insertBefore(values[0], values[1]);
+    expect(list.toArray()).toEqual([values[1], values[0]]);
+    expect(list.size).toBe(2);
+
+    list.append(values[2]);
+    list.insertBefore(values[2], values[3]);
+
+    expect(list.toArray()).toEqual([
+      values[1],
+      values[0],
+      values[3],
+      values[2],
+    ]);
+    expect(list.size).toBe(4);
+  });
+
+  test("find a value", () => {
+    expect(list.find(values[0])).not.toBeNull();
+
+    list.append(values[1]);
+
+    expect(list.find(values[0])?.toArray()).toEqual([values[0], values[1]]);
+    expect(list.find(values[1])?.toArray()).toEqual([values[1]]);
+
+    expect(list.find(values[2])).toBeNull();
   });
 
   test("delete a value", () => {
@@ -51,11 +106,38 @@ describe("Linked Lists Tests", () => {
     expect(list.getTail()).toBe(values[3]);
   });
 
+  test("clear the list", () => {
+    list.clear();
+    expect(list.toArray()).toBeArrayOfSize(0);
+    expect(list.size).toBe(0);
+  });
+
   test("is list empty", () => {
     expect(list.isEmpty()).toBeFalse();
-    list.delete(values[0]);
+    list.clear();
     expect(list.isEmpty()).not.toBeFalse();
   });
 
+  test("convert the list to Array", () => {
+    list.append(values[1]);
+    list.append(values[2]);
+    list.append(values[3]);
+    list.append(values[4]);
+
+    expect(list.toArray()).toBeArray();
+    expect(list.toArray()).toBeArrayOfSize(values.length);
+  });
+
+  test("reverse the list", () => {
+    list.append(values[1]);
+    list.append(values[2]);
+    list.append(values[3]);
+    list.append(values[4]);
+
+    list.reverse();
+
+    expect(list.toArray()).toEqual(values.reverse());
+    expect(list.toArray()).toBeArrayOfSize(values.length);
+  });
 
 });

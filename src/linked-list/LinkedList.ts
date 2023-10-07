@@ -6,9 +6,9 @@ interface ILinkedList<T> {
 
   append(value: T): void;
   prepend(value: T): void;
-  insertAfter(value: T): void;
-  insertBefore(value: T): void;
-  find(value: T): Node<T>;
+  insertAfter(after: T, value: T): void;
+  insertBefore(before: T, value: T): void;
+  find(value: T): Node<T> | null;
   delete(value: T): void;
   clear(): void;
   isEmpty(): Boolean;
@@ -43,16 +43,57 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   prepend(value: T): void {
-    throw new Error("Method not implemented.");
+    const node = new Node(value);
+    node.next = this.head;
+    this.head = node;
+    this.size++;
   }
-  insertAfter(value: T): void {
-    throw new Error("Method not implemented.");
+
+  insertAfter(after: T, value: T): void {
+    const node = new Node(value);
+    let current = this.head;
+    while (current) {
+      if (current.value === after) {
+        node.next = current.next;
+        current.next = node;
+        break;
+      }
+      current = current.next;
+    }
+    this.size++;
   }
-  insertBefore(value: T): void {
-    throw new Error("Method not implemented.");
+
+  insertBefore(before: T, value: T): void {
+    const node = new Node(value);
+
+    let prev = null;
+    let current = this.head;
+
+    while (current) {
+      if (current.value === before) {
+        if (prev) {
+          node.next = current;
+          prev.next = node;
+        } else {
+          node.next = current;
+          this.head = node;
+        }
+        break;
+      }
+      prev = current;
+      current = current.next;
+    }
+    this.size++;
   }
-  find(value: T): Node<T> {
-    throw new Error("Method not implemented.");
+
+  find(value: T): Node<T> | null {
+    if (!this.head) return null;
+    let current = this.head;
+    while (current) {
+      if (current.value === value) return current;
+      current = current.next!;
+    }
+    return null;
   }
 
   delete(value: T): void {
@@ -76,8 +117,10 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   clear(): void {
-    throw new Error("Method not implemented.");
+    this.head = null;
+    this.size = 0;
   }
+
   isEmpty = (): Boolean =>
     this.head?.value === (null || undefined) && this.head === null;
 
@@ -104,7 +147,16 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   reverse(): void {
-    throw new Error("Method not implemented.");
+    let prev = null,
+      next = null,
+      current = this.head;
+    while (current) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+    this.head = prev;
   }
 
   print(): void {
