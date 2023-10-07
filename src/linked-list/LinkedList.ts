@@ -36,15 +36,19 @@ export default class LinkedList<T> implements ILinkedList<T> {
   delete(value: T): void {
     if (!this.head) return;
 
+    if (this.head.value === value) {
+      this.head = this.head.next;
+      this.size--;
+      return;
+    }
+
     let current = this.head;
-    let prev = null;
-    while (current) {
-      if (current.value === value) {
-        prev ? (prev.next = current.next) : (this.head = current.next!);
+    while (current.next) {
+      if (current.next.value === value) {
+        current.next = current.next?.next!;
         this.size--;
         return;
       }
-      prev = current;
       current = current.next!;
     }
   }

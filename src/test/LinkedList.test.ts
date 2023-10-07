@@ -18,10 +18,16 @@ describe("Linked Lists Tests", () => {
     expect(list.toArray()).toEqual([values[0], values[1]]);
   });
 
-  test("delete a value", () => {
+  test("delete a value of head", () => {
     list.delete(values[0]);
     expect(list.toArray()).toEqual([]);
   });
+
+ test("delete a value of a node", () => {
+   list.append(values[1]);
+   list.delete(values[1]);
+   expect(list.toArray()).toEqual([values[0]]);
+ });
 
   test("list is empty", () => {});
 });

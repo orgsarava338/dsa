@@ -2,6 +2,11 @@
   "name": "dsa",
   "module": "main.ts",
   "type": "module",
+  "scripts": {
+    "dev": "bun --watch main.ts",
+    "start": "bun main.ts",
+    "test": "bun test"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },
