@@ -23,9 +23,18 @@ describe("Linked Lists Tests", () => {
     list.append(values[2]);
     list.append(values[3]);
     list.append(values[4]);
+
     list.delete(values[0]);
-    const [zero, ...expected] = values;
+
+    let expected = values.filter((e) => e !== values[0]);
     expect(list.toArray()).toEqual(expected);
+    expect(list.size).toBe(expected.length);
+
+    list.delete(values[4]);
+
+    expected = expected.filter((e) => e !== values[4]);
+    expect(list.toArray()).toEqual(expected);
+    expect(list.size).toBe(expected.length);
   });
 
  test("get head value", () => {
