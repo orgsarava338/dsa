@@ -3,10 +3,9 @@ import LinkedList from "./src/list/singly-linked-list";
 
 const list = new DoubleLinkedList(1);
 
-console.log(list.getHead(), list.getTail(), list.isEmpty());
-console.log(list);
+list.print();
 
-list.clear();
+list.append(2);
+list.append(3);
 
-console.log(list.getHead(), list.getTail(), list.isEmpty());
-console.log(list);
+list.print();

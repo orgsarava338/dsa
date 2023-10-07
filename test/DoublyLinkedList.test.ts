@@ -1,16 +1,17 @@
 import { beforeEach, describe, expect, test } from "bun:test";
-import LinkedList from "../src/list/singly-linked-list";
+import DoublyLinkedList from "../src/list/doubly-linked-list";
 
-describe("Linked Lists Tests", () => {
-  let list: LinkedList<number>;
+describe("DoublyLinkedList Tests", () => {
+  let list: DoublyLinkedList<number>;
   const values = [1, 2, 3, 4, 5];
 
   beforeEach(() => {
-    list = new LinkedList(values[0]);
+    list = new DoublyLinkedList(values[0]);
   });
 
   test("create a list", () => {
     expect(list.toArray()).toEqual([values[0]]);
+    expect(list.size).toBe(1);
   });
 
   test("append a value", () => {
@@ -139,5 +140,4 @@ describe("Linked Lists Tests", () => {
     expect(list.toArray()).toEqual(values.reverse());
     expect(list.toArray()).toBeArrayOfSize(values.length);
   });
-
 });

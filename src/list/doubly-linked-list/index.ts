@@ -27,11 +27,19 @@ export default class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
 
   constructor(value?: T, head = null) {
     this.head = this.tail = new Node(value);
-    this.size = 2;
+    this.size = 1;
   }
 
   append(value: T): void {
-    throw new Error("Method not implemented.");
+    const node = new Node(value);
+    if (this.isEmpty()) this.head = this.tail = node;
+    else {
+      node.prev = this.tail;
+      if (this.tail) this.tail.next = node;
+      else throw new Error("this don't have tail");
+      this.tail = node;
+    }
+    this.size++;
   }
   prepend(value: T): void {
     throw new Error("Method not implemented.");
@@ -54,18 +62,29 @@ export default class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
     this.size = 0;
   }
 
-  isEmpty = (): Boolean => this.head !== null && this.tail !== null;
+  isEmpty = (): Boolean => this.head === null && this.tail === null;
 
   getHead = (): T | null | undefined => this.head?.value;
   getTail = (): T | null | undefined => this.tail?.value;
 
   toArray(): T[] {
-    throw new Error("Method not implemented.");
+    const array: T[] = [];
+    if (this.isEmpty()) return array;
+    else {
+      let current = this.head;
+      while (current) {
+        array.push(current.value!);
+        current = current.next;
+      }
+    }
+    return array;
   }
+
   reverse(): void {
     throw new Error("Method not implemented.");
   }
+  
   print(): void {
-    throw new Error("Method not implemented.");
+    console.log({ list: this.toArray(), size: this.size });
   }
 }
