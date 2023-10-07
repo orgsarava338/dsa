@@ -1,6 +1,6 @@
 import Node from "./Node";
 
-interface IDoubleLinkedList<T> {
+interface IDoublyLinkedList<T> {
   head: Node<T> | null;
   tail: Node<T> | null;
   size: number;
@@ -20,15 +20,14 @@ interface IDoubleLinkedList<T> {
   print(): void;
 }
 
-export default class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
+export default class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
   head: Node<T> | null;
   tail: Node<T> | null;
   size: number;
 
-  constructor(value: T, head = null) {
-    this.head = new Node(value);
-    this.tail = this.head;
-    this.size = 1;
+  constructor(value?: T, head = null) {
+    this.head = this.tail = new Node(value);
+    this.size = 2;
   }
 
   append(value: T): void {
@@ -49,10 +48,9 @@ export default class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
   delete(value: T): void {
     throw new Error("Method not implemented.");
   }
-  
+
   clear(): void {
-    this.head = null;
-    this.tail = null;
+    this.head = this.tail = null;
     this.size = 0;
   }
 
