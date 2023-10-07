@@ -82,12 +82,15 @@ export default class LinkedList<T> implements ILinkedList<T> {
     throw new Error("Method not implemented.");
   }
 
-  getHead(): T | null | undefined {
-    throw new Error("Method not implemented.");
-  }
+  getHead = (): T | null | undefined => this.head?.value;
 
   getTail(): T | null | undefined {
-    throw new Error("Method not implemented.");
+    if (!this.head) return null;
+    let current = this.head;
+    while (current.next) {
+      current = current.next!;
+    }
+    return current.value;
   }
 
   toArray(): T[] {

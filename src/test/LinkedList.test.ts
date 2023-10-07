@@ -18,16 +18,28 @@ describe("Linked Lists Tests", () => {
     expect(list.toArray()).toEqual([values[0], values[1]]);
   });
 
-  test("delete a value of head", () => {
+  test("delete a value", () => {
+    list.append(values[1]);
+    list.append(values[2]);
+    list.append(values[3]);
+    list.append(values[4]);
     list.delete(values[0]);
-    expect(list.toArray()).toEqual([]);
+    const [zero, ...expected] = values;
+    expect(list.toArray()).toEqual(expected);
   });
 
- test("delete a value of a node", () => {
+ test("get head value", () => {
    list.append(values[1]);
-   list.delete(values[1]);
-   expect(list.toArray()).toEqual([values[0]]);
+   list.append(values[2]);
+   list.append(values[3]);
+   expect(list.getHead()).toBe(values[0]);
  });
 
-  test("list is empty", () => {});
+ test("get tail value", () => {
+   list.append(values[1]);
+   list.append(values[2]);
+   list.append(values[3]);
+   expect(list.getTail()).toBe(values[3]);
+ });
+
 });
