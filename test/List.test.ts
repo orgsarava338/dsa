@@ -9,12 +9,12 @@ for (const List of lists) {
     let list: any;
     const values = [1, 2, 3, 4, 5];
 
-    afterAll(() => {
-      console.log(`\n---------- ${List.name} Tests Finished ----------\n`);
-    });
-
     beforeEach(() => {
       list = new List(values[0]);
+    });
+
+    afterAll(() => {
+      console.log(`\n---------- ${List.name} Tests Finished ----------\n`);
     });
 
     test("create a list", () => {
@@ -138,6 +138,7 @@ for (const List of lists) {
       list.append(values[4]);
 
       expect(list.toArray()).toBeArray();
+      expect(list.toArray()).toEqual(values);
       expect(list.toArray()).toBeArrayOfSize(values.length);
     });
 
