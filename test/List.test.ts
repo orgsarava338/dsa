@@ -3,10 +3,11 @@ import SinglyLinkedList from "../src/list/singly-linked-list/SinglyLinkedList";
 import DoublyLinkedList from "../src/list/doubly-linked-list/DoublyLinkedList";
 
 const lists = [SinglyLinkedList, DoublyLinkedList];
+type List = SinglyLinkedList<number> | DoublyLinkedList<number>;
 
 for (const List of lists) {
   describe(`${List.name} Tests`, () => {
-    let list: any;
+    let list: List;
     const values = [1, 2, 3, 4, 5];
 
     beforeEach(() => {
