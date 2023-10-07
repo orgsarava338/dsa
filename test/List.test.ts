@@ -3,7 +3,7 @@ import SinglyLinkedList from "../src/list/singly-linked-list/SinglyLinkedList";
 import DoublyLinkedList from "../src/list/doubly-linked-list/DoublyLinkedList";
 
 const lists = [SinglyLinkedList, DoublyLinkedList];
-type T = number | string | Object | Function | T[];
+type T = number;
 type List = SinglyLinkedList<T> | DoublyLinkedList<T>;
 
 for (const List of lists) {
