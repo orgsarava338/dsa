@@ -121,8 +121,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
     this.size = 0;
   }
 
-  isEmpty = (): Boolean =>
-    this.head?.value === (null || undefined) && this.head === null;
+  isEmpty = (): Boolean => this.head === null;
 
   getHead = (): T | null | undefined => this.head?.value;
 
