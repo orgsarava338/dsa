@@ -5,8 +5,17 @@ interface ILinkedList<T> {
   size: number;
 
   append(value: T): void;
+  prepend(value: T): void;
+  insertAfter(value: T): void;
+  insertBefore(value: T): void;
+  find(value: T): Node<T>;
   delete(value: T): void;
+  clear(): void;
+  isEmpty(): Boolean;
   toArray(): T[];
+  getHead(): T | null | undefined;
+  getTail(): T | null | undefined;
+  reverse(): void;
   print(): void;
 }
 
@@ -33,6 +42,19 @@ export default class LinkedList<T> implements ILinkedList<T> {
     this.size++;
   }
 
+  prepend(value: T): void {
+    throw new Error("Method not implemented.");
+  }
+  insertAfter(value: T): void {
+    throw new Error("Method not implemented.");
+  }
+  insertBefore(value: T): void {
+    throw new Error("Method not implemented.");
+  }
+  find(value: T): Node<T> {
+    throw new Error("Method not implemented.");
+  }
+
   delete(value: T): void {
     if (!this.head) return;
 
@@ -53,6 +75,21 @@ export default class LinkedList<T> implements ILinkedList<T> {
     }
   }
 
+  clear(): void {
+    throw new Error("Method not implemented.");
+  }
+  isEmpty(): Boolean {
+    throw new Error("Method not implemented.");
+  }
+
+  getHead(): T | null | undefined {
+    throw new Error("Method not implemented.");
+  }
+
+  getTail(): T | null | undefined {
+    throw new Error("Method not implemented.");
+  }
+
   toArray(): T[] {
     const array: T[] = [];
     if (!this.head) return array;
@@ -62,6 +99,10 @@ export default class LinkedList<T> implements ILinkedList<T> {
       current = current.next!;
     }
     return array;
+  }
+
+  reverse(): void {
+    throw new Error("Method not implemented.");
   }
 
   print(): void {
