@@ -3,7 +3,8 @@ import SinglyLinkedList from "../src/list/singly-linked-list/SinglyLinkedList";
 import DoublyLinkedList from "../src/list/doubly-linked-list/DoublyLinkedList";
 
 const lists = [SinglyLinkedList, DoublyLinkedList];
-type List = SinglyLinkedList<number> | DoublyLinkedList<number>;
+type T = number | string | Array<T> | Object | any;
+type List = SinglyLinkedList<T> | DoublyLinkedList<T>;
 
 for (const List of lists) {
   describe(`${List.name} Tests`, () => {
