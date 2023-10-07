@@ -23,7 +23,14 @@ export default class DoublyLinkedList<T> implements ListMethods<T> {
   }
 
   prepend(value: T): void {
-    throw new Error("Method not implemented.");
+    const node = new Node(value);
+    if (this.isEmpty()) this.head = this.tail = node;
+    else {
+      node.next = this.head;
+      if (this.head) this.head.prev = node;
+      this.head = node;
+    }
+    this.size++;
   }
 
   insertAfter(after: T, value: T): void {
