@@ -37,18 +37,25 @@ describe("Linked Lists Tests", () => {
     expect(list.size).toBe(expected.length);
   });
 
- test("get head value", () => {
-   list.append(values[1]);
-   list.append(values[2]);
-   list.append(values[3]);
-   expect(list.getHead()).toBe(values[0]);
- });
+  test("get head value", () => {
+    list.append(values[1]);
+    list.append(values[2]);
+    list.append(values[3]);
+    expect(list.getHead()).toBe(values[0]);
+  });
 
- test("get tail value", () => {
-   list.append(values[1]);
-   list.append(values[2]);
-   list.append(values[3]);
-   expect(list.getTail()).toBe(values[3]);
- });
+  test("get tail value", () => {
+    list.append(values[1]);
+    list.append(values[2]);
+    list.append(values[3]);
+    expect(list.getTail()).toBe(values[3]);
+  });
+
+  test("is list empty", () => {
+    expect(list.isEmpty()).toBeFalse();
+    list.delete(values[0]);
+    expect(list.isEmpty()).not.toBeFalse();
+  });
+
 
 });

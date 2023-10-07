@@ -78,9 +78,8 @@ export default class LinkedList<T> implements ILinkedList<T> {
   clear(): void {
     throw new Error("Method not implemented.");
   }
-  isEmpty(): Boolean {
-    throw new Error("Method not implemented.");
-  }
+  isEmpty = (): Boolean =>
+    this.head?.value === (null || undefined) && this.head === null;
 
   getHead = (): T | null | undefined => this.head?.value;
 
