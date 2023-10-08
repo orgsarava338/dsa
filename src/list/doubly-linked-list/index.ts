@@ -1,7 +1,7 @@
 import Node from "./Node";
-import { ListMethods } from "../Methods";
+import { IList } from "../Interface";
 
-export default class DoublyLinkedList<T> implements ListMethods<T> {
+export default class DoublyLinkedList<T> implements IList<T> {
   head: Node<T> | null;
   tail: Node<T> | null;
   size: number;

@@ -1,7 +1,7 @@
-import { NodeMethods } from "../Methods";
+import { INode } from "../Interface";
 import DoublyLinkedList from ".";
 
-export default class Node<T> implements NodeMethods<T> {
+export default class Node<T> implements INode<T> {
   value?: T | null;
   next: Node<T> | null;
   prev: Node<T> | null;
@@ -31,7 +31,7 @@ export default class Node<T> implements NodeMethods<T> {
     else list.tail = node;
     this.next = node;
   }
-  
+
   insertBefore(node: Node<T>, list: DoublyLinkedList<T>): void {
     node.next = this;
     node.prev = this.prev;

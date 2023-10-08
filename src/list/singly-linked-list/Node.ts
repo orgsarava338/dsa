@@ -1,6 +1,6 @@
-import { NodeMethods } from "../Methods";
+import { INode } from "../Interface";
 
-export default class Node<T> implements NodeMethods<T> {
+export default class Node<T> implements INode<T> {
   value?: T | null;
   next: Node<T> | null;
 

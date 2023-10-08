@@ -1,11 +1,11 @@
 import Node from "./singly-linked-list/Node";
 
-export interface NodeMethods<T> {
+export interface INode<T> {
   toArray(): T[];
   print(): void;
 }
 
-export interface ListMethods<T> {
+export interface IList<T> {
   size: number;
 
   append(value: T): void;
