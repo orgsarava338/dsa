@@ -34,19 +34,86 @@ export default class DoublyLinkedList<T> implements ListMethods<T> {
   }
 
   insertAfter(after: T, value: T): void {
-    throw new Error("Method not implemented.");
+    const node = new Node(value);
+
+    const insertNodeAfter = (thisNode: Node<T>) => {
+      thisNode.insertAfter(node, this);
+      this.size++;
+    };
+
+    if (this.isEmpty()) {
+      this.head = this.tail = node;
+      this.size++;
+      return;
+    } else {
+      let head = this.head;
+      let tail = this.tail;
+      while (head && tail) {
+        if (head.value === after) return insertNodeAfter(head);
+        else if (tail.value === after) return insertNodeAfter(tail);
+
+        head = head.next;
+        tail = tail.prev;
+      }
+    }
   }
 
   insertBefore(before: T, value: T): void {
-    throw new Error("Method not implemented.");
+    const node = new Node(value);
+
+    const insertNodeBefore = (thisNode: Node<T>) => {
+      thisNode.insertBefore(node, this);
+      this.size++;
+    };
+
+    if (this.isEmpty()) {
+      this.head = this.tail = node;
+      this.size++;
+      return;
+    } else {
+      let head = this.head;
+      let tail = this.tail;
+      while (head && tail) {
+        if (head.value === before) return insertNodeBefore(head);
+        else if (tail.value === before) return insertNodeBefore(tail);
+
+        head = head.next;
+        tail = tail.prev;
+      }
+    }
   }
 
   find(value: T): Node<T> | null {
-    throw new Error("Method not implemented.");
+    if (this.isEmpty()) return null;
+    let head = this.head;
+    let tail = this.tail;
+    while (head && tail) {
+      if (head.value === value) return head;
+      else if (tail.value === value) return tail;
+
+      head = head.next;
+      tail = tail.prev;
+    }
+    return null;
   }
-  
+
   delete(value: T): void {
-    throw new Error("Method not implemented.");
+    if (this.isEmpty()) return;
+
+    const removeNode = (node: Node<T>): void => {
+      node.removeNode(this);
+      this.size--;
+    };
+
+    let head = this.head;
+    let tail = this.tail;
+
+    while (head && tail) {
+      if (head.value === value) return removeNode(head);
+      else if (tail.value === value) return removeNode(tail);
+      head = head.next;
+      tail = tail.prev;
+    }
   }
 
   clear(): void {
@@ -55,7 +122,6 @@ export default class DoublyLinkedList<T> implements ListMethods<T> {
   }
 
   isEmpty = (): Boolean => this.head === null && this.tail === null;
-
   getHead = (): T | null | undefined => this.head?.value;
   getTail = (): T | null | undefined => this.tail?.value;
 
@@ -73,7 +139,14 @@ export default class DoublyLinkedList<T> implements ListMethods<T> {
   }
 
   reverse(): void {
-    throw new Error("Method not implemented.");
+    let head = this.head;
+    let tail = this.tail;
+    let temp: Node<T> | null;
+    while (head !== tail) {
+      temp = head;
+      head = tail;
+      tail = temp;
+    }
   }
 
   print(): void {
