@@ -1,6 +1,6 @@
 import { afterAll, beforeEach, describe, expect, test } from "bun:test";
-import SinglyLinkedList from "../src/list/singly-linked-list/SinglyLinkedList";
-import DoublyLinkedList from "../src/list/doubly-linked-list/DoublyLinkedList";
+import SinglyLinkedList from "../src/list/singly-linked-list";
+import DoublyLinkedList from "../src/list/doubly-linked-list";
 
 const lists = [SinglyLinkedList, DoublyLinkedList];
 type T = number;

@@ -139,14 +139,17 @@ export default class DoublyLinkedList<T> implements ListMethods<T> {
   }
 
   reverse(): void {
-    let head = this.head;
-    let tail = this.tail;
-    let temp: Node<T> | null;
-    while (head !== tail) {
-      temp = head;
-      head = tail;
-      tail = temp;
+    let current = this.head;
+    let temp: Node<T> | null = null;
+
+    while (current) {
+      temp = current.prev;
+      current.prev = current.next;
+      current.next = temp;
+
+      current = current.prev;
     }
+    if (temp) this.head = temp.prev;
   }
 
   print(): void {

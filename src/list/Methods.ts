@@ -6,6 +6,8 @@ export interface NodeMethods<T> {
 }
 
 export interface ListMethods<T> {
+  size: number;
+
   append(value: T): void;
   prepend(value: T): void;
   insertAfter(after: T, value: T): void;

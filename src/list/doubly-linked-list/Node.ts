@@ -1,5 +1,5 @@
 import { NodeMethods } from "../Methods";
-import DoublyLinkedList from "./DoublyLinkedList";
+import DoublyLinkedList from ".";
 
 export default class Node<T> implements NodeMethods<T> {
   value?: T | null;
