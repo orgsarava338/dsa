@@ -49,8 +49,8 @@ for (const List of lists) {
       expect(list.toArray()).toEqual([values[0], values[1]]);
       expect(list.size).toBe(2);
 
-      list.insertAfter(values[1], values[2]);
-      expect(list.toArray()).toEqual([values[0], values[1], values[2]]);
+      list.insertAfter(values[0], values[2]);
+      expect(list.toArray()).toEqual([values[0], values[2], values[1]]);
       expect(list.size).toBe(3);
     });
 
