@@ -1,13 +1,16 @@
+import SinglyLinkedList from "./src/list/singly-linked-list/SinglyLinkedList";
 import DoublyLinkedList from "./src/list/doubly-linked-list/DoublyLinkedList";
 
-type T = number | string | Object | Function | T[];
+const list = new SinglyLinkedList(1);
 
-const list = new DoublyLinkedList<T>(1);
-
-list.print();
-
-list.append([1, 2, 3, 4]);
-list.append("str");
+list.append(2)
 list.append(3);
+list.append(4);
+list.append(5);
+
 
 list.print();
+list.reverse();
+list.print();
+list.reverse()
+list.print()

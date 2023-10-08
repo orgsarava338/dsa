@@ -46,18 +46,12 @@ for (const List of lists) {
 
     test("insert after a value", () => {
       list.insertAfter(values[0], values[1]);
-
       expect(list.toArray()).toEqual([values[0], values[1]]);
       expect(list.size).toBe(2);
 
-      list.append(values[2]);
-
-      list.insertAfter(values[2], values[3]);
-
-      expect(list.toArray()).toEqual(
-        values.filter((e) => (e !== values[4] ? e !== values[5] : false))
-      );
-      expect(list.size).toBe(4);
+      list.insertAfter(values[1], values[2]);
+      expect(list.toArray()).toEqual([values[0], values[1], values[2]]);
+      expect(list.size).toBe(3);
     });
 
     test("insert before a value", () => {
@@ -65,20 +59,14 @@ for (const List of lists) {
       expect(list.toArray()).toEqual([values[1], values[0]]);
       expect(list.size).toBe(2);
 
-      list.append(values[2]);
-      list.insertBefore(values[2], values[3]);
-
-      expect(list.toArray()).toEqual([
-        values[1],
-        values[0],
-        values[3],
-        values[2],
-      ]);
-      expect(list.size).toBe(4);
+      list.insertBefore(values[0], values[2]);
+      expect(list.toArray()).toEqual([values[1], values[2], values[0]]);
+      expect(list.size).toBe(3);
     });
 
     test("find a value", () => {
       expect(list.find(values[0])).not.toBeNull();
+      expect(list.find(values[0])?.toArray()).toEqual([values[0]]);
 
       list.append(values[1]);
 
@@ -100,6 +88,12 @@ for (const List of lists) {
       expect(list.toArray()).toEqual(expected);
       expect(list.size).toBe(expected.length);
 
+      list.delete(values[3]);
+
+      expected = expected.filter((e) => e !== values[3]);
+      expect(list.toArray()).toEqual(expected);
+      expect(list.toArray()).toBeArrayOfSize(expected.length);
+
       list.delete(values[4]);
 
       expected = expected.filter((e) => e !== values[4]);
@@ -108,20 +102,22 @@ for (const List of lists) {
     });
 
     test("get head value", () => {
-      list.append(values[1]);
-      list.append(values[2]);
-      list.append(values[3]);
       expect(list.getHead()).toBe(values[0]);
+      list.prepend(values[1]);
+      expect(list.getHead()).toBe(values[1]);
     });
 
     test("get tail value", () => {
+      expect(list.getTail()).toBe(values[0]);
       list.append(values[1]);
-      list.append(values[2]);
-      list.append(values[3]);
-      expect(list.getTail()).toBe(values[3]);
+      expect(list.getTail()).toBe(values[1]);
     });
 
     test("clear the list", () => {
+      expect(list.toArray()).toBeArrayOfSize(1);
+
+      list.append(values[1]);
+
       list.clear();
       expect(list.toArray()).toBeArrayOfSize(0);
       expect(list.size).toBe(0);
@@ -129,11 +125,16 @@ for (const List of lists) {
 
     test("is list empty", () => {
       expect(list.isEmpty()).toBeFalse();
+      list.append(values[1]);
       list.clear();
       expect(list.isEmpty()).not.toBeFalse();
     });
 
     test("convert the list to Array", () => {
+      expect(list.toArray()).toBeArray();
+      expect(list.toArray()).toEqual([values[0]]);
+      expect(list.toArray()).toBeArrayOfSize(1);
+
       list.append(values[1]);
       list.append(values[2]);
       list.append(values[3]);
@@ -145,15 +146,16 @@ for (const List of lists) {
     });
 
     test("reverse the list", () => {
+      list.reverse();
+      expect(list.toArray()).toEqual([values[0]]);
+
       list.append(values[1]);
       list.append(values[2]);
       list.append(values[3]);
       list.append(values[4]);
 
       list.reverse();
-
       expect(list.toArray()).toEqual(values.reverse());
-      expect(list.toArray()).toBeArrayOfSize(values.length);
     });
   });
 }
