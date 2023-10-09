@@ -1,15 +1,7 @@
 import SinglyLinkedList from "./src/list/singly-linked-list";
 import DoublyLinkedList from "./src/list/doubly-linked-list";
+import Queue from "./src/queue";
 
-const list = new DoublyLinkedList(1);
+const queue = new Queue([1,2,3])
 
-list.append(2);
-list.append(3);
-list.append(4);
-list.append(5);
-
-list.delete(4);
-list.print();
-
-list.delete(2);
-list.print();
+console.log(queue.toArray());
