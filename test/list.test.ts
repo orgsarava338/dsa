@@ -22,9 +22,19 @@ for (const List of lists) {
     test("create a list", () => {
       expect(list.toArray()).toEqual([values[0]]);
       expect(list.size).toBe(1);
+
+      let l = new List([...values]);
+      expect(l.toArray()).toEqual(values);
+      expect(l.size).toBe(values.length)
+
+      l = new List([])
+      expect(l.toArray()).toBeArrayOfSize(0)
+
+      l = new List();
+      expect(l.toArray()).toBeArrayOfSize(0);
     });
 
-    test("append a value", () => {
+    test("append a value in list", () => {
       list.append(values[1]);
       expect(list.toArray()).toEqual([values[0], values[1]]);
       expect(list.size).toBe(2);
@@ -34,7 +44,7 @@ for (const List of lists) {
       expect(list.size).toBe(3);
     });
 
-    test("prepand a value", () => {
+    test("prepand a value in list", () => {
       list.prepend(values[1]);
       expect(list.toArray()).toEqual([values[1], values[0]]);
       expect(list.size).toBe(2);
@@ -44,7 +54,7 @@ for (const List of lists) {
       expect(list.size).toBe(3);
     });
 
-    test("insert after a value", () => {
+    test("insert after a value in list", () => {
       list.insertAfter(values[0], values[1]);
       expect(list.toArray()).toEqual([values[0], values[1]]);
       expect(list.size).toBe(2);
@@ -54,7 +64,7 @@ for (const List of lists) {
       expect(list.size).toBe(3);
     });
 
-    test("insert before a value", () => {
+    test("insert before a value in list", () => {
       list.insertBefore(values[0], values[1]);
       expect(list.toArray()).toEqual([values[1], values[0]]);
       expect(list.size).toBe(2);
@@ -64,7 +74,7 @@ for (const List of lists) {
       expect(list.size).toBe(3);
     });
 
-    test("find a value", () => {
+    test("find a value in list", () => {
       expect(list.find(values[0])).not.toBeNull();
       expect(list.find(values[0])?.toArray()).toEqual([values[0]]);
 
@@ -76,7 +86,7 @@ for (const List of lists) {
       expect(list.find(values[2])).toBeNull();
     });
 
-    test("delete a value", () => {
+    test("delete a value in list", () => {
       list.append(values[1]);
       list.append(values[2]);
       list.append(values[3]);
@@ -101,13 +111,13 @@ for (const List of lists) {
       expect(list.size).toBe(expected.length);
     });
 
-    test("get head value", () => {
+    test("get head value in list", () => {
       expect(list.getHead()).toBe(values[0]);
       list.prepend(values[1]);
       expect(list.getHead()).toBe(values[1]);
     });
 
-    test("get tail value", () => {
+    test("get tail value in list", () => {
       expect(list.getTail()).toBe(values[0]);
       list.append(values[1]);
       expect(list.getTail()).toBe(values[1]);

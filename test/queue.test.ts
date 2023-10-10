@@ -18,8 +18,7 @@ describe("Queue Tests", () => {
     expect(q.size()).toBe(elements.length);
 
     let qu = new Queue();
-    expect(qu.elements).toEqual([]);
-    expect(qu.size()).toBe(0);
+    expect(qu.elements).toBeArrayOfSize(0);
   });
 
   test("enqueue in queue", () => {

@@ -6,9 +6,39 @@ export default class DoublyLinkedList<T> implements IList<T> {
   tail: Node<T> | null;
   size: number;
 
-  constructor(value?: T, head = null) {
-    this.head = this.tail = new Node(value);
-    this.size = 1;
+  constructor();
+  constructor(value: T);
+  constructor(value: T[]);
+  constructor(...value: T[]);
+  constructor(value?: T | T[]) {
+    if (Array.isArray(value)) {
+      if (value.length === 0) {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+      } else {
+        let head = new Node(value[0]);
+        let current = head;
+        for (let i = 1; i < value.length; i++) {
+          let node = new Node(value[i]);
+          current.setNext(node);
+          node.setPrev(current);
+          current = node;
+        }
+        this.head = head;
+        this.tail = current;
+        this.size = value.length;
+      }
+    } else if (value !== undefined) {
+      const node = new Node(value);
+      this.head = node;
+      this.tail = node;
+      this.size = 1;
+    } else {
+      this.head = null;
+      this.tail = null;
+      this.size = 0;
+    }
   }
 
   append(value: T): void {

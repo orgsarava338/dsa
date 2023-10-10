@@ -3,11 +3,12 @@ import DoublyLinkedList from "./src/list/doubly-linked-list";
 import Queue from "./src/queue";
 import Stack from "./src/stack";
 
-const s = new Stack(1);
-const q = new Queue([1, 2, 3, 4]);
+const values = [1, 2, 3, 4, 5];
 
-q.print();
+const sl = new SinglyLinkedList(values);
+const dl = new DoublyLinkedList(values);
+const s = new Stack(values);
+const q = new Queue(values);
 
-q.forEach((e) => console.log(e));
 
-// q.filter((e) => e !== 0).print();
+sl.print();

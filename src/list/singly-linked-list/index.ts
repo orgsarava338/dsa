@@ -5,9 +5,31 @@ export default class SinglyLinkedList<T> implements IList<T> {
   head: Node<T> | null;
   size: number;
 
-  constructor(value?: T) {
-    this.head = new Node(value);
-    this.size = 1;
+  constructor();
+  constructor(value: T);
+  constructor(value: T[]);
+  constructor(value?: T | T[]) {
+    if (Array.isArray(value)) {
+      if (value.length === 0) {
+        this.head = null;
+        this.size = 0;
+      } else {
+        let node = new Node(value[0]);
+        let current = node;
+        for (let i = 1; i < value.length; i++) {
+          current.setNext(new Node(value[i]));
+          current = current.next!;
+        }
+        this.head = node;
+        this.size = value.length;
+      }
+    } else if (value !== undefined) {
+      this.head = new Node(value);
+      this.size = 1;
+    } else {
+      this.head = null;
+      this.size = 0;
+    }
   }
 
   append(value: T): void {

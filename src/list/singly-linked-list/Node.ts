@@ -4,9 +4,9 @@ export default class Node<T> implements INode<T> {
   value?: T | null;
   next: Node<T> | null;
 
-  constructor(value?: T, next = null) {
+  constructor(value?: T) {
     this.value = value;
-    this.next = next;
+    this.next = null;
   }
 
   toArray(): T[] {
@@ -19,6 +19,10 @@ export default class Node<T> implements INode<T> {
       current = current.next!;
     }
     return array;
+  }
+
+  setNext(node: Node<T>): void {
+    this.next = node;
   }
 
   print(): void {

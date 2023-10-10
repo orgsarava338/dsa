@@ -17,6 +17,7 @@ describe("Stack Tests", () => {
 
     let st = new Stack(elements);
     expect(st.toArray()).toEqual(elements);
+    expect(st.size()).toBe(elements.length);
   });
 
   test("push a element in stack", () => {
