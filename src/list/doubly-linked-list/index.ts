@@ -109,13 +109,10 @@ export default class DoublyLinkedList<T> implements IList<T> {
   find(value: T): Node<T> | null {
     if (this.isEmpty()) return null;
     let head = this.head;
-    let tail = this.tail;
-    while (head && tail) {
+    while (head) {
       if (head.value === value) return head;
-      else if (tail.value === value) return tail;
 
       head = head.next;
-      tail = tail.prev;
     }
     return null;
   }
