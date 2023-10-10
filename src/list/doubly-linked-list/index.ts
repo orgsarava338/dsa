@@ -77,13 +77,10 @@ export default class DoublyLinkedList<T> implements IList<T> {
       return;
     } else {
       let head = this.head;
-      let tail = this.tail;
-      while (head && tail) {
+      while (head) {
         if (head.value === after) return insertNodeAfter(head);
-        else if (tail.value === after) return insertNodeAfter(tail);
 
         head = head.next;
-        tail = tail.prev;
       }
     }
   }
@@ -102,13 +99,9 @@ export default class DoublyLinkedList<T> implements IList<T> {
       return;
     } else {
       let head = this.head;
-      let tail = this.tail;
-      while (head && tail) {
+      while (head) {
         if (head.value === before) return insertNodeBefore(head);
-        else if (tail.value === before) return insertNodeBefore(tail);
-
         head = head.next;
-        tail = tail.prev;
       }
     }
   }
@@ -136,13 +129,10 @@ export default class DoublyLinkedList<T> implements IList<T> {
     };
 
     let head = this.head;
-    let tail = this.tail;
 
-    while (head && tail) {
+    while (head) {
       if (head.value === value) return removeNode(head);
-      else if (tail.value === value) return removeNode(tail);
       head = head.next;
-      tail = tail.prev;
     }
   }
 
