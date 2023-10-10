@@ -21,10 +21,6 @@ export default class Node<T> implements INode<T> {
     return array;
   }
 
-  setNext(node: Node<T>): void {
-    this.next = node;
-  }
-
   print(): void {
     console.log({ node: this.toArray() });
   }

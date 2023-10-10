@@ -21,8 +21,8 @@ export default class DoublyLinkedList<T> implements IList<T> {
         let current = head;
         for (let i = 1; i < value.length; i++) {
           let node = new Node(value[i]);
-          current.setNext(node);
-          node.setPrev(current);
+          current.next = node;
+          node.prev = current;
           current = node;
         }
         this.head = head;
@@ -45,7 +45,7 @@ export default class DoublyLinkedList<T> implements IList<T> {
     const node = new Node(value);
     if (this.isEmpty()) this.head = this.tail = node;
     else {
-      node.prev = this.tail;
+      node.prev = this.tail!;
       if (this.tail) this.tail.next = node;
       this.tail = node;
     }

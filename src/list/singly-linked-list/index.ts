@@ -17,7 +17,7 @@ export default class SinglyLinkedList<T> implements IList<T> {
         let node = new Node(value[0]);
         let current = node;
         for (let i = 1; i < value.length; i++) {
-          current.setNext(new Node(value[i]));
+          current.next = new Node(value[i]);
           current = current.next!;
         }
         this.head = node;

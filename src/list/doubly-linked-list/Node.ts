@@ -12,14 +12,6 @@ export default class Node<T> implements INode<T> {
     this.prev = prev;
   }
 
-  setNext(node: Node<T>): void {
-    this.next = node;
-  }
-  
-  setPrev(node: Node<T>): void {
-    this.prev = node;
-  }
-
   toArray(): T[] {
     if (!this) return [];
     const array: T[] = [];
