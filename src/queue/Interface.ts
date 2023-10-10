@@ -2,18 +2,16 @@ import Queue from ".";
 
 export interface IQueue<T> {
   elements: T[];
-  size: number;
 
-  enqueue(element: T): void;
+  enqueue(element: T | T[]): void;
   dequeue(): T | undefined;
-  enqueueMany(elements: T[]): void;
   dequeueMany(count: number): T[];
   peek(): T | undefined;
   isEmpty(): Boolean;
-  isFull(): Boolean;
   getFront(): T | undefined;
   getBack(): T | undefined;
   clear(): void;
+  size(): number;
   concat(queue: Queue<T>): void;
   clone(): Queue<T>;
   toArray(): T[];

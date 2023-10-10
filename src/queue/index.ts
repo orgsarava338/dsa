@@ -2,85 +2,74 @@ import { IQueue } from "./Interface";
 
 export default class Queue<T> implements IQueue<T> {
   elements: T[];
-  size: number;
 
   constructor();
-  constructor(arg: T);
-  constructor(arg?: T[]) {
-    if (Array.isArray(arg)) {
-      this.elements = arg;
-      this.size = arg.length;
-    } else if (arg) {
-      this.elements = [arg];
-      this.size = 1;
-    } else {
-      this.elements = [];
-      this.size = 0;
-    }
+  constructor(element: T);
+  constructor(element: T[]);
+  constructor(element?: T | T[]) {
+    if (Array.isArray(element)) this.elements = element;
+    else if (element) this.elements = [element];
+    else this.elements = [];
   }
 
-  enqueue(element: T): void {
-    this.elements.push(element);
-    this.size = this.elements.length;
-  }
-  dequeue(): T | undefined {
-    if (this.size) this.size--;
-    return this.elements.shift();
+  enqueue(element: T | T[]): void {
+    if (Array.isArray(element)) this.elements = [...this.elements, ...element];
+    else this.elements.push(element);
   }
 
-  enqueueMany(elements: T[]): void {
-    this.elements = [...this.elements, ...elements];
-    this.size = this.elements.length;
-  }
+  dequeue = (): T | undefined => this.elements.shift();
+
   dequeueMany(count: number): T[] {
-    let ans: T[] = [];
-    if ( count <= 0) return ans;
-    else {
-      this.elements = this.elements.slice(count);
-      this.size = this.elements.length;
-      // ans = 
+    if (count <= 0) return [];
+    let dequeued: T[] = [];
+    while (count > 0 && this.elements.length > 0) {
+      dequeued.push(this.elements.shift()!);
+      count--;
     }
-    return ans;
+    return dequeued;
   }
-  peek(): T | undefined {
-    throw new Error("Method not implemented.");
-  }
-  isEmpty(): Boolean {
-    throw new Error("Method not implemented.");
-  }
-  isFull(): Boolean {
-    throw new Error("Method not implemented.");
-  }
-  getFront(): T | undefined {
-    throw new Error("Method not implemented.");
-  }
-  getBack(): T | undefined {
-    throw new Error("Method not implemented.");
-  }
+
+  size = (): number => this.elements.length;
+
+  peek = (): T | undefined =>
+    this.elements.length > 0 ? this.elements[0] : undefined;
+
+  isEmpty = (): Boolean => this.elements.length === 0;
+
+  getFront = (): T | undefined => this.elements[0];
+
+  getBack = (): T | undefined => this.elements[this.elements.length - 1];
+
   clear(): void {
-    throw new Error("Method not implemented.");
+    this.elements = [];
   }
+
   concat(queue: Queue<T>): void {
-    throw new Error("Method not implemented.");
+    this.elements = [...this.elements, ...queue.elements];
   }
-  clone(): Queue<T> {
-    throw new Error("Method not implemented.");
-  }
+
+  clone = (): Queue<T> => new Queue<T>([...this.elements]);
+
   toArray(): T[] {
     return this.elements;
   }
+
   toString(): string {
     return this.elements.toString();
   }
 
   print(): void {
-    console.log({ elements: this.elements, size: this.size });
+    console.log({ elements: this.elements, size: this.size() });
   }
 
   forEach(callback: (element: T) => void): void {
-    throw new Error("Method not implemented.");
+    for (let element of this.elements) callback(element);
   }
+
   filter(callback: (element: T) => Boolean): Queue<T> {
-    throw new Error("Method not implemented.");
+    const filtered = new Queue<T>();
+    for (let element of this.elements)
+      if (callback(element)) filtered.enqueue(element);
+    return filtered;
   }
 }
