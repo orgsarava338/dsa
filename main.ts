@@ -1,7 +1,12 @@
 import SinglyLinkedList from "./src/list/singly-linked-list";
 import DoublyLinkedList from "./src/list/doubly-linked-list";
 import Queue from "./src/queue";
+import Stack from "./src/stack";
 
-const queue = new Queue([1,2,3])
+const s = new Stack(1);
 
-console.log(queue.toArray());
+s.push([2, 3, 4, 5]);
+
+s.print();
+console.log(s.peekAt(2));
+s.print();
