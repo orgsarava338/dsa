@@ -9,10 +9,6 @@ describe("Queue Tests", () => {
     queue = new Queue(values[0]);
   });
 
-  afterAll(() => {
-    console.log(`\n---------- Queue Tests Finished ----------\n`);
-  });
-
   test("create a queue", () => {
     expect(queue.elements).toEqual([values[0]]);
     expect(queue.size).toBe(1);
