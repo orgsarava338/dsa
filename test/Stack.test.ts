@@ -1,7 +1,7 @@
 import { afterAll, beforeEach, describe, expect, test } from "bun:test";
 import Stack from "../src/stack";
 
-describe("Queue Tests", () => {
+describe("Stack Tests", () => {
   let stack: Stack<number>;
   const elements = [1, 2, 3, 4, 5];
 
@@ -73,6 +73,18 @@ describe("Queue Tests", () => {
     expect(stack.toArray()).toBeArrayOfSize(0);
   });
 
+  test("size of a stack", () => {
+    expect(stack.size()).toBe(1);
+    expect(stack.size()).toBe(1);
+    stack.push(elements);
+
+    let expected = [elements[0], ...elements];
+    
+    expect(stack.size()).toBe(expected.length);
+    stack.pop();
+    expect(stack.size()).toBe(expected.length -1);
+  });
+
   test("stack to array", () => {
     stack.push(elements);
     expect(stack.toArray()).toEqual([elements[0], ...elements]);
@@ -106,6 +118,6 @@ describe("Queue Tests", () => {
     const duplicated = stack.duplicate();
 
     expect(duplicated.toArray()).toEqual([elements[0], ...elements]);
-    expect(typeof stack).toEqual(typeof duplicated)
+    expect(typeof stack).toEqual(typeof duplicated);
   });
 });
