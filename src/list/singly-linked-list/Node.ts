@@ -1,10 +1,10 @@
 import { INode } from "../Interface";
 
 export default class Node<T> implements INode<T> {
-  value?: T | null;
+  value: T | null;
   next: Node<T> | null;
 
-  constructor(value?: T) {
+  constructor(value: T) {
     this.value = value;
     this.next = null;
   }

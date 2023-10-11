@@ -2,14 +2,13 @@ import { INode } from "../Interface";
 import DoublyLinkedList from ".";
 
 export default class Node<T> implements INode<T> {
-  value?: T | null;
+  value: T | null;
   next: Node<T> | null;
   prev: Node<T> | null;
 
-  constructor(value?: T, next = null, prev = null) {
+  constructor(value: T) {
     this.value = value;
-    this.next = next;
-    this.prev = prev;
+    this.next = this.prev = null;
   }
 
   toArray(): T[] {

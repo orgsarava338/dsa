@@ -1,6 +1,7 @@
 import Node from "./singly-linked-list/Node";
 
 export interface INode<T> {
+  value: T | null;
   toArray(): T[];
   print(): void;
 }

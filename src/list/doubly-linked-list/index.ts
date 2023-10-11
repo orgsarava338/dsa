@@ -9,12 +9,10 @@ export default class DoublyLinkedList<T> implements IList<T> {
   constructor();
   constructor(value: T);
   constructor(value: T[]);
-  constructor(...value: T[]);
   constructor(value?: T | T[]) {
     if (Array.isArray(value)) {
       if (value.length === 0) {
-        this.head = null;
-        this.tail = null;
+        this.head = this.tail = null;
         this.size = 0;
       } else {
         let head = new Node(value[0]);
@@ -30,13 +28,10 @@ export default class DoublyLinkedList<T> implements IList<T> {
         this.size = value.length;
       }
     } else if (value !== undefined) {
-      const node = new Node(value);
-      this.head = node;
-      this.tail = node;
+      this.head = this.tail = new Node(value);
       this.size = 1;
     } else {
-      this.head = null;
-      this.tail = null;
+      this.head = this.tail = null;
       this.size = 0;
     }
   }
