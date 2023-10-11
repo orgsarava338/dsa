@@ -1,10 +1,14 @@
 import { afterAll, beforeEach, describe, expect, test } from "bun:test";
 import SinglyLinkedList from "../src/list/singly-linked-list";
 import DoublyLinkedList from "../src/list/doubly-linked-list";
+import CircularSinglyLinkedList from "../src/list/singly-linked-list/circular";
 
-const lists = [SinglyLinkedList, DoublyLinkedList];
+const lists = [SinglyLinkedList, DoublyLinkedList, CircularSinglyLinkedList];
 type T = number;
-type List = SinglyLinkedList<T> | DoublyLinkedList<T>;
+type List =
+  | SinglyLinkedList<T>
+  | DoublyLinkedList<T>
+  | CircularSinglyLinkedList<T>;
 
 for (const List of lists) {
   describe(`${List.name} Tests`, () => {
