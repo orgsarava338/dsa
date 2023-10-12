@@ -3,6 +3,7 @@ import Queue from ".";
 export interface IQueue<T> {
   elements: T[];
 
+  isInstanceOf(classToCheck: { new (): any }): Boolean;
   enqueue(element: T | T[]): void;
   dequeue(): T | undefined;
   dequeueMany(count: number): T[];

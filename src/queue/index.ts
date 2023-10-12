@@ -12,6 +12,10 @@ export default class Queue<T> implements IQueue<T> {
     else this.elements = [];
   }
 
+  isInstanceOf(classToCheck: { new (): any }): Boolean {
+    return this instanceof classToCheck;
+  }
+
   enqueue(element: T | T[]): void {
     if (Array.isArray(element)) this.elements = [...this.elements, ...element];
     else this.elements.push(element);

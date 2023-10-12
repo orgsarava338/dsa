@@ -10,6 +10,7 @@ export interface IList<T> {
   head: Node<T> | null;
   size: number;
 
+  isInstanceOf(classToCheck: { new (): any }): Boolean;
   append(value: T): void;
   prepend(value: T): void;
   insertAfter(after: T, value: T): void;

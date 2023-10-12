@@ -37,6 +37,10 @@ export default class CircularDoublyLinkedList<T> implements IList<T> {
     }
   }
 
+  isInstanceOf(classToCheck: { new (): any }): Boolean {
+    return this instanceof classToCheck;
+  }
+
   append(value: T): void {
     throw new Error("Method not implemented.");
   }

@@ -3,6 +3,7 @@ import Stack from ".";
 export default interface IStack<T> {
   elements: T[];
 
+  isInstanceOf(classToCheck: { new (): any }): Boolean;
   push(element: T | T[]): void;
   pop(): T | undefined;
   peek(): T | undefined;

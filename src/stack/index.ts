@@ -12,6 +12,10 @@ export default class Stack<T> implements IStack<T> {
     else this.elements = [];
   }
 
+  isInstanceOf(classToCheck: { new (): any }): Boolean {
+    return this instanceof classToCheck;
+  }
+
   push(element: T | T[]): void {
     if (Array.isArray(element)) this.elements = [...this.elements, ...element];
     else this.elements = [...this.elements, element];

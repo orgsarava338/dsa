@@ -32,6 +32,10 @@ export default class SinglyLinkedList<T> implements IList<T> {
     }
   }
 
+  isInstanceOf(classToCheck: { new (): any }): Boolean {
+    return this instanceof classToCheck;
+  }
+
   append(value: T): void {
     const node = new Node(value);
     if (!this.head) this.head = node;

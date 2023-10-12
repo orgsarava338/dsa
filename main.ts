@@ -13,6 +13,3 @@ const sl = new SinglyLinkedList(values);
 const dl = new DoublyLinkedList(values);
 const scl = new CircularSinglyLinkedList(values);
 const dcl = new CircularDoublyLinkedList(values);
-
-
-console.log(dcl);

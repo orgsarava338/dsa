@@ -34,6 +34,10 @@ export default class DoublyLinkedList<T> implements IList<T> {
     }
   }
 
+  isInstanceOf(classToCheck: { new (): any }): Boolean {
+    return this instanceof classToCheck;
+  }
+
   append(value: T): void {
     const node = new Node(value);
     if (this.isEmpty()) this.head = this.tail = node;
