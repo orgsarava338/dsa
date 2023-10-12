@@ -136,9 +136,13 @@ export default class SinglyLinkedList<T> implements IList<T> {
     this._size = 0;
   }
 
-  isEmpty = (): Boolean => this._head === null;
+  isEmpty(): Boolean {
+    return this._head === null;
+  }
 
-  getHead = (): T | null | undefined => this._head?.value;
+  getHead(): T | null | undefined {
+    return this._head?.value;
+  }
 
   getTail(): T | null | undefined {
     if (!this._head) return null;

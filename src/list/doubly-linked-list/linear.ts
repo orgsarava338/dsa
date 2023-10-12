@@ -160,9 +160,17 @@ export default class DoublyLinkedList<T> implements IList<T> {
     this._size = 0;
   }
 
-  isEmpty = (): Boolean => this._head === null && this._tail === null;
-  getHead = (): T | null | undefined => this._head?.value;
-  getTail = (): T | null | undefined => this._tail?.value;
+  isEmpty(): Boolean {
+    return this._head === null && this._tail === null;
+  }
+
+  getHead(): T | null | undefined {
+    return this._head?.value;
+  }
+  
+  getTail(): T | null | undefined {
+    return this._tail?.value;
+  }
 
   toArray(): T[] {
     const array: T[] = [];

@@ -81,7 +81,8 @@ export default class CircularSinglyLinkedList<T> implements IList<T> {
   reverse(): void {
     throw new Error("Method not implemented.");
   }
+  
   print(): void {
-    throw new Error("Method not implemented.");
+    console.log({ list: this.toArray(), size: this._size });
   }
 }
