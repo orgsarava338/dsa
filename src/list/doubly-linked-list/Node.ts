@@ -23,30 +23,6 @@ export default class Node<T> implements INode<T> {
     return array;
   }
 
-  insertAfter(node: Node<T>, list: DoublyLinkedList<T>): void {
-    node.prev = this;
-    node.next = this.next;
-    if (this.next) this.next.prev = node;
-    else list.tail = node;
-    this.next = node;
-  }
-
-  insertBefore(node: Node<T>, list: DoublyLinkedList<T>): void {
-    node.next = this;
-    node.prev = this.prev;
-    if (this.prev) this.prev.next = node;
-    else list.head = node;
-    this.prev = node;
-  }
-
-  removeNode(list: DoublyLinkedList<T>): void {
-    if (this.prev) this.prev.next = this.next;
-    else list.head = this.next;
-
-    if (this.next) this.next.prev = this.prev;
-    else list.tail = this.prev;
-  }
-
   print(): void {
     console.log({ node: this.toArray() });
   }

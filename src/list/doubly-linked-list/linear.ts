@@ -39,11 +39,11 @@ export default class DoublyLinkedList<T> implements IList<T> {
   }
 
   get head() {
-    return this._head
+    return this._head;
   }
 
   get tail() {
-    return this._tail
+    return this._tail;
   }
 
   isInstanceOf(classToCheck: { new (): any }): Boolean {
@@ -75,8 +75,13 @@ export default class DoublyLinkedList<T> implements IList<T> {
   insertAfter(after: T, value: T): void {
     const node = new Node(value);
 
-    const insertNodeAfter = (thisNode: Node<T>) => {
-      thisNode.insertAfter(node, this);
+    const insertNodeAfter = (current: Node<T>) => {
+      node.prev = current;
+      node.next = current.next;
+      if (current.next) current.next.prev = node;
+      else this._tail = node;
+      current.next = node;
+
       this._size++;
     };
 
@@ -85,11 +90,11 @@ export default class DoublyLinkedList<T> implements IList<T> {
       this._size++;
       return;
     } else {
-      let head = this._head;
-      while (head) {
-        if (head.value === after) return insertNodeAfter(head);
+      let current = this._head;
+      while (current) {
+        if (current.value === after) return insertNodeAfter(current);
 
-        head = head.next;
+        current = current.next;
       }
     }
   }
@@ -97,8 +102,12 @@ export default class DoublyLinkedList<T> implements IList<T> {
   insertBefore(before: T, value: T): void {
     const node = new Node(value);
 
-    const insertNodeBefore = (thisNode: Node<T>) => {
-      thisNode.insertBefore(node, this);
+    const insertNodeBefore = (current: Node<T>) => {
+      node.next = current;
+      node.prev = current.prev;
+      if (current.prev) current.prev.next = node;
+      else this._head = node;
+      current.prev = node;
       this._size++;
     };
 
@@ -107,10 +116,10 @@ export default class DoublyLinkedList<T> implements IList<T> {
       this._size++;
       return;
     } else {
-      let head = this._head;
-      while (head) {
-        if (head.value === before) return insertNodeBefore(head);
-        head = head.next;
+      let current = this._head;
+      while (current) {
+        if (current.value === before) return insertNodeBefore(current);
+        current = current.next;
       }
     }
   }
@@ -130,7 +139,11 @@ export default class DoublyLinkedList<T> implements IList<T> {
     if (this.isEmpty()) return;
 
     const removeNode = (node: Node<T>): void => {
-      node.removeNode(this);
+      if (node.prev) node.prev.next = node.next;
+      else this._head = node.next;
+
+      if (node.next) node.next.prev = node.prev;
+      else this._tail = node.prev;
       this._size--;
     };
 
