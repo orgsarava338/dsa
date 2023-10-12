@@ -7,6 +7,7 @@ export interface INode<T> {
 }
 
 export interface IList<T> {
+  head: Node<T> | null;
   size: number;
 
   append(value: T): void;
