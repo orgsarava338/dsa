@@ -8,18 +8,29 @@ export default class CircularDoublyLinkedList<T> implements IList<T> {
 
   constructor();
   constructor(value: T[]);
-  constructor(valus: T);
+  constructor(value: T);
   constructor(value?: T | T[]) {
     if (Array.isArray(value))
       if (value.length === 0) {
         this.head = this.tail = null;
         this.size = 0;
       } else {
+        let current = (this.head = new Node(value[0]));
+        for (let i = 1; i < value.length && current.next !== this.head; i++) {
+          let node = new Node(value[i]);
+          current.next = node;
+          node.prev = current;
+          current = node;
+        }
+        this.head.prev = this.tail = current;
+        this.tail.next = this.head;
+        this.size = value.length;
       }
     else if (value !== undefined) {
       const node = new Node(value);
       this.head = this.tail = node;
       this.head.next = this.tail.next = this.head.prev = this.tail.prev = node;
+      this.size = 1;
     } else {
       this.head = this.tail = null;
       this.size = 0;

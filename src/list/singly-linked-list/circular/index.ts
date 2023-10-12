@@ -1,57 +1,75 @@
-import SinglyLinkedList from "..";
-import { IList } from "../../Interface";
 import Node from "../Node";
+import { IList } from "../../Interface";
 
-export default class CircularSinglyLinkedList<T>
-  extends SinglyLinkedList<T>
-  implements IList<T>
-{
+export default class CircularSinglyLinkedList<T> implements IList<T> {
+  head: Node<T> | null;
+  size: number;
+
+  constructor();
+  constructor(value: T);
+  constructor(value: T[]);
   constructor(value?: T | T[]) {
-    if (Array.isArray(value)) super(value as T[]);
-    else super(value as T);
-    if (this.head && this.head.next) {
-      let current = this.head;
-      while (current && current.next) current = current.next!;
-      current.next = this.head;
+    if (Array.isArray(value)) {
+      if (value.length === 0) {
+        this.head = null;
+        this.size = 0;
+      } else {
+        let node = new Node(value[0]);
+        let current = node;
+        for (let i = 1; i < value.length; i++) {
+          current.next = new Node(value[i]);
+          current = current.next!;
+        }
+        this.head = current.next = node;
+        this.size = value.length;
+      }
+    } else if (value !== undefined && value) {
+      const node = new Node(value);
+      this.head = node.next = node;
+      this.size = 1;
+    } else {
+      this.head = null;
+      this.size = 0;
     }
   }
 
   append(value: T): void {
-    const node = new Node(value);
-    if (!this.head) this.head = node.next = node;
-    else {
-      let last = this.head;
-      while (last && last.next !== this.head) last = last.next!;
-      last.next = node;
-      node.next = this.head;
-      this.size++;
-    }
+    throw new Error("Method not implemented.");
   }
-
   prepend(value: T): void {
-    const node = new Node(value);
-    if (!this.head) this.head = node.next = node;
-    else {
-      let head = this.head;
-      let last = head;
-      while (last && last.next !== this.head) last = last.next!;
-      node.next = head;
-      this.head = node;
-      // last.next = node;
-      this.size++;
-    }
+    throw new Error("Method not implemented.");
   }
-
+  insertAfter(after: T, value: T): void {
+    throw new Error("Method not implemented.");
+  }
+  insertBefore(before: T, value: T): void {
+    throw new Error("Method not implemented.");
+  }
+  find(value: T): Node<T> | null {
+    throw new Error("Method not implemented.");
+  }
+  delete(value: T): void {
+    throw new Error("Method not implemented.");
+  }
+  clear(): void {
+    throw new Error("Method not implemented.");
+  }
+  isEmpty(): Boolean {
+    throw new Error("Method not implemented.");
+  }
   toArray(): T[] {
-    if (!this.head) return [];
-    const array: T[] = [];
-    if (this.head) {
-      let current = this.head;
-      do {
-        array.push(current.value!);
-        current = current.next!;
-      } while (current && current !== this.head);
-    }
-    return array;
+    throw new Error("Method not implemented.");
+  }
+  getHead(): T | null | undefined {
+    throw new Error("Method not implemented.");
+  }
+  getTail(): T | null | undefined {
+    throw new Error("Method not implemented.");
+  }
+  reverse(): void {
+    throw new Error("Method not implemented.");
+  }
+  print(): void {
+    throw new Error("Method not implemented.");
   }
 }
