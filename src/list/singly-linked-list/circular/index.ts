@@ -3,7 +3,7 @@ import { IList } from "../../Interface";
 
 export default class CircularSinglyLinkedList<T> implements IList<T> {
   head: Node<T> | null;
-  size: number;
+  private _length: number;
 
   constructor();
   constructor(value: T);
@@ -12,7 +12,7 @@ export default class CircularSinglyLinkedList<T> implements IList<T> {
     if (Array.isArray(value)) {
       if (value.length === 0) {
         this.head = null;
-        this.size = 0;
+        this._length = 0;
       } else {
         let node = new Node(value[0]);
         let current = node;
@@ -21,16 +21,20 @@ export default class CircularSinglyLinkedList<T> implements IList<T> {
           current = current.next!;
         }
         this.head = current.next = node;
-        this.size = value.length;
+        this._length = value.length;
       }
     } else if (value !== undefined && value) {
       const node = new Node(value);
       this.head = node.next = node;
-      this.size = 1;
+      this._length = 1;
     } else {
       this.head = null;
-      this.size = 0;
+      this._length = 0;
     }
+  }
+
+  get size() {
+    return this._length;
   }
 
   isInstanceOf(classToCheck: { new (): any }): Boolean {

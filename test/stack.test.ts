@@ -114,11 +114,11 @@ describe("Stack Tests", () => {
     expect(stack.contains(10)).toBeFalse();
   });
 
-  test("duplicate a stack", () => {
+  test("clone a stack", () => {
     stack.push(elements);
-    const duplicated = stack.duplicate();
+    const cloned = stack.clone();
 
-    expect(duplicated.toArray()).toEqual([elements[0], ...elements]);
-    expect(typeof stack).toEqual(typeof duplicated);
+    expect(cloned.toArray()).toEqual([elements[0], ...elements]);
+    expect(typeof stack).toEqual(typeof cloned);
   });
 });

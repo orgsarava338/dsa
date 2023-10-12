@@ -21,7 +21,9 @@ export default class Queue<T> implements IQueue<T> {
     else this.elements.push(element);
   }
 
-  dequeue = (): T | undefined => this.elements.shift();
+  dequeue(): T | undefined {
+    return this.elements.shift();
+  }
 
   dequeueMany(count: number): T[] {
     if (count <= 0) return [];
@@ -33,16 +35,25 @@ export default class Queue<T> implements IQueue<T> {
     return dequeued;
   }
 
-  size = (): number => this.elements.length;
+  size(): number {
+    return this.elements.length;
+  }
 
-  peek = (): T | undefined =>
-    this.elements.length > 0 ? this.elements[0] : undefined;
+  peek(): T | undefined {
+    return this.elements.length > 0 ? this.elements[0] : undefined;
+  }
 
-  isEmpty = (): Boolean => this.elements.length === 0;
+  isEmpty(): Boolean {
+    return this.elements.length === 0;
+  }
 
-  getFront = (): T | undefined => this.elements[0];
+  getFront(): T | undefined {
+    return this.elements[0];
+  }
 
-  getBack = (): T | undefined => this.elements[this.elements.length - 1];
+  getBack(): T | undefined {
+    return this.elements[this.elements.length - 1];
+  }
 
   clear(): void {
     this.elements = [];
@@ -52,7 +63,13 @@ export default class Queue<T> implements IQueue<T> {
     this.elements = [...this.elements, ...queue.elements];
   }
 
-  clone = (): Queue<T> => new Queue<T>([...this.elements]);
+  clone(): Queue<T> {
+    return new Queue<T>([...this.elements]);
+  }
+
+  reverse(): void {
+    this.elements = [...this.elements.reverse()];
+  }
 
   toArray(): T[] {
     return this.elements;

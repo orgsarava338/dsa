@@ -4,7 +4,7 @@ import IList from "../Interface";
 export default class CircularDoublyLinkedList<T> implements IList<T> {
   tail: Node<T> | null;
   head: Node<T> | null;
-  size: number;
+  private _length: number;
 
   constructor();
   constructor(value: T[]);
@@ -13,7 +13,7 @@ export default class CircularDoublyLinkedList<T> implements IList<T> {
     if (Array.isArray(value))
       if (value.length === 0) {
         this.head = this.tail = null;
-        this.size = 0;
+        this._length = 0;
       } else {
         let current = (this.head = new Node(value[0]));
         for (let i = 1; i < value.length && current.next !== this.head; i++) {
@@ -24,17 +24,21 @@ export default class CircularDoublyLinkedList<T> implements IList<T> {
         }
         this.head.prev = this.tail = current;
         this.tail.next = this.head;
-        this.size = value.length;
+        this._length = value.length;
       }
     else if (value !== undefined) {
       const node = new Node(value);
       this.head = this.tail = node;
       this.head.next = this.tail.next = this.head.prev = this.tail.prev = node;
-      this.size = 1;
+      this._length = 1;
     } else {
       this.head = this.tail = null;
-      this.size = 0;
+      this._length = 0;
     }
+  }
+
+  get size() {
+    return this._length;
   }
 
   isInstanceOf(classToCheck: { new (): any }): Boolean {

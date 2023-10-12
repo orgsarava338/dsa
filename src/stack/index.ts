@@ -21,29 +21,53 @@ export default class Stack<T> implements IStack<T> {
     else this.elements = [...this.elements, element];
   }
 
-  pop = (): T | undefined => (this.isEmpty() ? undefined : this.elements.pop());
+  pop(): T | undefined {
+    return this.isEmpty() ? undefined : this.elements.pop();
+  }
 
-  peek = (): T | undefined => this.elements[this.size() - 1];
+  peek(): T | undefined {
+    return this.elements[this.size() - 1];
+  }
 
-  peekAt = (index: number): T | undefined => this.elements[index - 1];
+  peekAt(index: number): T | undefined {
+    return this.elements[index - 1];
+  }
 
-  isEmpty = (): boolean => this.elements.length === 0;
+  isEmpty(): boolean {
+    return this.elements.length === 0;
+  }
 
-  size = (): number => this.elements.length;
+  size(): number {
+    return this.elements.length;
+  }
 
   clear(): void {
     this.elements = [];
   }
 
-  toArray = (): T[] => this.elements;
+  toArray(): T[] {
+    return this.elements;
+  }
 
-  toArrayReversed = (): T[] => this.elements.reverse();
+  reverse(): void {
+    this.elements = [...this.elements.reverse()];
+  }
 
-  search = (element: T): number => this.elements.indexOf(element) + 1;
+  toArrayReversed(): T[] {
+    return this.elements.reverse();
+  }
 
-  contains = (element: T): boolean => this.elements.includes(element);
+  search(element: T): number {
+    return this.elements.indexOf(element) + 1;
+  }
 
-  duplicate = (): Stack<T> => new Stack<T>([...this.elements]);
+  contains(element: T): boolean {
+    return this.elements.includes(element);
+  }
+
+  clone(): Stack<T> {
+    return new Stack<T>([...this.elements]);
+  }
 
   print(): void {
     console.log({ stack: this.elements, size: this.size() });

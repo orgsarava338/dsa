@@ -4,7 +4,7 @@ import IList from "./Interface";
 export default class DoublyLinkedList<T> implements IList<T> {
   head: Node<T> | null;
   tail: Node<T> | null;
-  size: number;
+  _length: number;
 
   constructor();
   constructor(value: T[]);
@@ -13,7 +13,7 @@ export default class DoublyLinkedList<T> implements IList<T> {
     if (Array.isArray(value)) {
       if (value.length === 0) {
         this.head = this.tail = null;
-        this.size = 0;
+        this._length = 0;
       } else {
         let current = (this.head = new Node(value[0]));
         for (let i = 1; i < value.length; i++) {
@@ -23,15 +23,19 @@ export default class DoublyLinkedList<T> implements IList<T> {
           current = node;
         }
         this.tail = current;
-        this.size = value.length;
+        this._length = value.length;
       }
     } else if (value !== undefined) {
       this.head = this.tail = new Node(value);
-      this.size = 1;
+      this._length = 1;
     } else {
       this.head = this.tail = null;
-      this.size = 0;
+      this._length = 0;
     }
+  }
+
+  get size() {
+    return this._length;
   }
 
   isInstanceOf(classToCheck: { new (): any }): Boolean {
@@ -46,7 +50,7 @@ export default class DoublyLinkedList<T> implements IList<T> {
       if (this.tail) this.tail.next = node;
       this.tail = node;
     }
-    this.size++;
+    this._length++;
   }
 
   prepend(value: T): void {
@@ -57,7 +61,7 @@ export default class DoublyLinkedList<T> implements IList<T> {
       if (this.head) this.head.prev = node;
       this.head = node;
     }
-    this.size++;
+    this._length++;
   }
 
   insertAfter(after: T, value: T): void {
@@ -65,12 +69,12 @@ export default class DoublyLinkedList<T> implements IList<T> {
 
     const insertNodeAfter = (thisNode: Node<T>) => {
       thisNode.insertAfter(node, this);
-      this.size++;
+      this._length++;
     };
 
     if (this.isEmpty()) {
       this.head = this.tail = node;
-      this.size++;
+      this._length++;
       return;
     } else {
       let head = this.head;
@@ -87,12 +91,12 @@ export default class DoublyLinkedList<T> implements IList<T> {
 
     const insertNodeBefore = (thisNode: Node<T>) => {
       thisNode.insertBefore(node, this);
-      this.size++;
+      this._length++;
     };
 
     if (this.isEmpty()) {
       this.head = this.tail = node;
-      this.size++;
+      this._length++;
       return;
     } else {
       let head = this.head;
@@ -119,7 +123,7 @@ export default class DoublyLinkedList<T> implements IList<T> {
 
     const removeNode = (node: Node<T>): void => {
       node.removeNode(this);
-      this.size--;
+      this._length--;
     };
 
     let head = this.head;
@@ -132,7 +136,7 @@ export default class DoublyLinkedList<T> implements IList<T> {
 
   clear(): void {
     this.head = this.tail = null;
-    this.size = 0;
+    this._length = 0;
   }
 
   isEmpty = (): Boolean => this.head === null && this.tail === null;
@@ -167,6 +171,6 @@ export default class DoublyLinkedList<T> implements IList<T> {
   }
 
   print(): void {
-    console.log({ list: this.toArray(), size: this.size });
+    console.log({ list: this.toArray(), size: this._length });
   }
 }
