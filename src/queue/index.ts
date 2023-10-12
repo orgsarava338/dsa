@@ -12,6 +12,10 @@ export default class Queue<T> implements IQueue<T> {
     else this.elements = [];
   }
 
+  get size() {
+    return this.elements.length;
+  }
+
   isInstanceOf(classToCheck: { new (): any }): Boolean {
     return this instanceof classToCheck;
   }
@@ -33,10 +37,6 @@ export default class Queue<T> implements IQueue<T> {
       count--;
     }
     return dequeued;
-  }
-
-  size(): number {
-    return this.elements.length;
   }
 
   peek(): T | undefined {
@@ -80,7 +80,7 @@ export default class Queue<T> implements IQueue<T> {
   }
 
   print(): void {
-    console.log({ elements: this.elements, size: this.size() });
+    console.log({ elements: this.elements, size: this.size });
   }
 
   forEach(callback: (element: T) => void): void {

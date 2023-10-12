@@ -17,7 +17,7 @@ describe("Stack Tests", () => {
 
     let st = new Stack(elements);
     expect(st.toArray()).toEqual(elements);
-    expect(st.size()).toBe(elements.length);
+    expect(st.size).toBe(elements.length);
   });
 
   test("push a element in stack", () => {
@@ -75,15 +75,15 @@ describe("Stack Tests", () => {
   });
 
   test("size of a stack", () => {
-    expect(stack.size()).toBe(1);
-    expect(stack.size()).toBe(1);
+    expect(stack.size).toBe(1);
+    expect(stack.size).toBe(1);
     stack.push(elements);
 
     let expected = [elements[0], ...elements];
     
-    expect(stack.size()).toBe(expected.length);
+    expect(stack.size).toBe(expected.length);
     stack.pop();
-    expect(stack.size()).toBe(expected.length -1);
+    expect(stack.size).toBe(expected.length -1);
   });
 
   test("stack to array", () => {

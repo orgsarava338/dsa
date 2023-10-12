@@ -1,4 +1,4 @@
-import { afterAll, beforeEach, describe, expect, test } from "bun:test";
+import { beforeEach, describe, expect, test } from "bun:test";
 import Queue from "../src/queue";
 
 describe("Queue Tests", () => {
@@ -11,11 +11,11 @@ describe("Queue Tests", () => {
 
   test("create a queue", () => {
     expect(queue.elements).toEqual([elements[0]]);
-    expect(queue.size()).toBe(1);
+    expect(queue.size).toBe(1);
 
     let q = new Queue(elements);
     expect(q.elements).toEqual(elements);
-    expect(q.size()).toBe(elements.length);
+    expect(q.size).toBe(elements.length);
 
     let qu = new Queue();
     expect(qu.elements).toBeArrayOfSize(0);
@@ -24,18 +24,18 @@ describe("Queue Tests", () => {
   test("enqueue in queue", () => {
     queue.enqueue(elements[1]);
     expect(queue.elements).toEqual([1, 2]);
-    expect(queue.size()).toBe(2);
+    expect(queue.size).toBe(2);
 
     let expected = [...queue.elements, ...elements];
     queue.enqueue(elements);
     expect(queue.elements).toEqual(expected);
-    expect(queue.size()).toBe(expected.length);
+    expect(queue.size).toBe(expected.length);
   });
 
   test("dequeue in queue", () => {
     expect(queue.dequeue()).toBe(elements[0]);
     expect(queue.elements).toBeArrayOfSize(0);
-    expect(queue.size()).toBe(0);
+    expect(queue.size).toBe(0);
     expect(queue.dequeue()).toBeUndefined();
 
     queue.enqueue(elements);
@@ -43,7 +43,7 @@ describe("Queue Tests", () => {
 
     expect(queue.dequeue()).toBe(elements[0]);
     expect(queue.elements).toEqual(expected);
-    expect(queue.size()).toBe(expected.length);
+    expect(queue.size).toBe(expected.length);
   });
 
   test("dequeue many in queue", () => {
@@ -61,9 +61,9 @@ describe("Queue Tests", () => {
   });
 
   test("size of queue", () => {
-    expect(queue.size()).toBe(1);
+    expect(queue.size).toBe(1);
     queue.enqueue([1, 2, 3]);
-    expect(queue.size()).toBe(4);
+    expect(queue.size).toBe(4);
   });
 
   test("peek the queue", () => {
@@ -95,7 +95,7 @@ describe("Queue Tests", () => {
 
     let expected = [...queue.elements, ...elements];
     queue.enqueue(elements);
-    expect(queue.getBack()).toBe(expected[expected.length -1]);
+    expect(queue.getBack()).toBe(expected[expected.length - 1]);
 
     queue.clear();
     expect(queue.getBack()).toBeUndefined();
@@ -108,21 +108,20 @@ describe("Queue Tests", () => {
 
   test("clone a queue", () => {
     queue.enqueue(elements);
-    let cloned = queue.clone()
+    let cloned = queue.clone();
     expect(cloned.elements).toEqual([elements[0], ...elements]);
-    expect(typeof queue).toEqual(typeof cloned)
+    expect(typeof queue).toEqual(typeof cloned);
   });
 
   test("queue to array", () => {
-    queue.enqueue(elements)
-    expect(queue.toArray()).toBeArray()
+    queue.enqueue(elements);
+    expect(queue.toArray()).toBeArray();
     expect(queue.toArray()).toEqual([elements[0], ...elements]);
-  })
+  });
 
   test("queue to string", () => {
     queue.enqueue(elements);
     expect(queue.toString()).toBeString();
     expect(queue.toString()).toBe([elements[0], ...elements].toString());
-  })
-
+  });
 });

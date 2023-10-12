@@ -9,7 +9,6 @@ export interface IQueue<T> extends CommonMethods<T> {
   peek(): T | undefined;
   getFront(): T | undefined;
   getBack(): T | undefined;
-  size(): number;
   concat(queue: Queue<T>): void;
   clone(): Queue<T>;
   toArray(): T[];

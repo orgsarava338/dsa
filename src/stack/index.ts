@@ -12,6 +12,10 @@ export default class Stack<T> implements IStack<T> {
     else this.elements = [];
   }
 
+  get size(): number {
+    return this.elements.length;
+  }
+
   isInstanceOf(classToCheck: { new (): any }): Boolean {
     return this instanceof classToCheck;
   }
@@ -26,7 +30,7 @@ export default class Stack<T> implements IStack<T> {
   }
 
   peek(): T | undefined {
-    return this.elements[this.size() - 1];
+    return this.elements[this.size - 1];
   }
 
   peekAt(index: number): T | undefined {
@@ -35,10 +39,6 @@ export default class Stack<T> implements IStack<T> {
 
   isEmpty(): boolean {
     return this.elements.length === 0;
-  }
-
-  size(): number {
-    return this.elements.length;
   }
 
   clear(): void {
@@ -70,6 +70,6 @@ export default class Stack<T> implements IStack<T> {
   }
 
   print(): void {
-    console.log({ stack: this.elements, size: this.size() });
+    console.log({ stack: this.elements, size: this.size });
   }
 }

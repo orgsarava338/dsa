@@ -8,7 +8,6 @@ export default interface IStack<T> extends CommonMethods<T>{
   pop(): T | undefined;
   peek(): T | undefined;
   peekAt(index: number): T | undefined;
-  size(): number;
   search(element: T): number;
   contains(element: T): boolean;
   clone(): Stack<T>;
