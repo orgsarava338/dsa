@@ -7,7 +7,8 @@ export interface INode<T> {
 }
 
 export interface IList<T> extends CommonMethods<T> {
-  head: Node<T> | null;
+  readonly head: Node<T> | null;
+  readonly size: number;
 
   append(value: T): void;
   prepend(value: T): void;

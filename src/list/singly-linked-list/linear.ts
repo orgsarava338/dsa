@@ -2,8 +2,8 @@ import Node from "./Node";
 import { IList } from "../Interface";
 
 export default class SinglyLinkedList<T> implements IList<T> {
-  head: Node<T> | null;
-  private _length: number;
+  private _head: Node<T> | null;
+  private _size: number;
 
   constructor();
   constructor(value: T[]);
@@ -11,8 +11,8 @@ export default class SinglyLinkedList<T> implements IList<T> {
   constructor(value?: T | T[]) {
     if (Array.isArray(value)) {
       if (value.length === 0) {
-        this.head = null;
-        this._length = 0;
+        this._head = null;
+        this._size = 0;
       } else {
         let node = new Node(value[0]);
         let current = node;
@@ -20,20 +20,24 @@ export default class SinglyLinkedList<T> implements IList<T> {
           current.next = new Node(value[i]);
           current = current.next!;
         }
-        this.head = node;
-        this._length = value.length;
+        this._head = node;
+        this._size = value.length;
       }
     } else if (value !== undefined) {
-      this.head = new Node(value);
-      this._length = 1;
+      this._head = new Node(value);
+      this._size = 1;
     } else {
-      this.head = null;
-      this._length = 0;
+      this._head = null;
+      this._size = 0;
     }
   }
 
   get size() {
-    return this._length;
+    return this._size;
+  }
+
+  get head() {
+    return this._head;
   }
 
   isInstanceOf(classToCheck: { new (): any }): Boolean {
@@ -42,27 +46,27 @@ export default class SinglyLinkedList<T> implements IList<T> {
 
   append(value: T): void {
     const node = new Node(value);
-    if (!this.head) this.head = node;
+    if (!this._head) this._head = node;
     else {
-      let current = this.head;
+      let current = this._head;
       while (current.next) {
         current = current.next!;
       }
       current.next = node;
     }
-    this._length++;
+    this._size++;
   }
 
   prepend(value: T): void {
     const node = new Node(value);
-    node.next = this.head;
-    this.head = node;
-    this._length++;
+    node.next = this._head;
+    this._head = node;
+    this._size++;
   }
 
   insertAfter(after: T, value: T): void {
     const node = new Node(value);
-    let current = this.head;
+    let current = this._head;
     while (current) {
       if (current.value === after) {
         node.next = current.next;
@@ -71,14 +75,14 @@ export default class SinglyLinkedList<T> implements IList<T> {
       }
       current = current.next;
     }
-    this._length++;
+    this._size++;
   }
 
   insertBefore(before: T, value: T): void {
     const node = new Node(value);
 
     let prev = null;
-    let current = this.head;
+    let current = this._head;
 
     while (current) {
       if (current.value === before) {
@@ -87,19 +91,19 @@ export default class SinglyLinkedList<T> implements IList<T> {
           prev.next = node;
         } else {
           node.next = current;
-          this.head = node;
+          this._head = node;
         }
         break;
       }
       prev = current;
       current = current.next;
     }
-    this._length++;
+    this._size++;
   }
 
   find(value: T): Node<T> | null {
-    if (!this.head) return null;
-    let current = this.head;
+    if (!this._head) return null;
+    let current = this._head;
     while (current) {
       if (current.value === value) return current;
       current = current.next!;
@@ -108,19 +112,19 @@ export default class SinglyLinkedList<T> implements IList<T> {
   }
 
   delete(value: T): void {
-    if (!this.head) return;
+    if (!this._head) return;
 
-    if (this.head.value === value) {
-      this.head = this.head.next;
-      this._length--;
+    if (this._head.value === value) {
+      this._head = this._head.next;
+      this._size--;
       return;
     }
 
-    let current = this.head;
+    let current = this._head;
     while (current.next) {
       if (current.next.value === value) {
         current.next = current.next?.next!;
-        this._length--;
+        this._size--;
         return;
       }
       current = current.next!;
@@ -128,17 +132,17 @@ export default class SinglyLinkedList<T> implements IList<T> {
   }
 
   clear(): void {
-    this.head = null;
-    this._length = 0;
+    this._head = null;
+    this._size = 0;
   }
 
-  isEmpty = (): Boolean => this.head === null;
+  isEmpty = (): Boolean => this._head === null;
 
-  getHead = (): T | null | undefined => this.head?.value;
+  getHead = (): T | null | undefined => this._head?.value;
 
   getTail(): T | null | undefined {
-    if (!this.head) return null;
-    let current = this.head;
+    if (!this._head) return null;
+    let current = this._head;
     while (current.next) {
       current = current.next!;
     }
@@ -147,8 +151,8 @@ export default class SinglyLinkedList<T> implements IList<T> {
 
   toArray(): T[] {
     const array: T[] = [];
-    if (!this.head) return array;
-    let current = this.head;
+    if (!this._head) return array;
+    let current = this._head;
     while (current) {
       array.push(current.value!);
       current = current.next!;
@@ -159,17 +163,17 @@ export default class SinglyLinkedList<T> implements IList<T> {
   reverse(): void {
     let prev = null,
       next = null,
-      current = this.head;
+      current = this._head;
     while (current) {
       next = current.next;
       current.next = prev;
       prev = current;
       current = next;
     }
-    this.head = prev;
+    this._head = prev;
   }
 
   print(): void {
-    console.log({ list: this.toArray(), _length: this._length });
+    console.log({ list: this.toArray(), size: this._size });
   }
 }

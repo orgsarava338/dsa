@@ -1,7 +1,7 @@
 import { IQueue } from "./Interface";
 
 export default class Queue<T> implements IQueue<T> {
-  elements: T[];
+  private elements: T[];
 
   constructor();
   constructor(element: T);

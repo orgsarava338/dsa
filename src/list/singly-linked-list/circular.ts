@@ -2,8 +2,8 @@ import Node from "./Node";
 import { IList } from "../Interface";
 
 export default class CircularSinglyLinkedList<T> implements IList<T> {
-  head: Node<T> | null;
-  private _length: number;
+  private _head: Node<T> | null;
+  private _size: number;
 
   constructor();
   constructor(value: T);
@@ -11,8 +11,8 @@ export default class CircularSinglyLinkedList<T> implements IList<T> {
   constructor(value?: T | T[]) {
     if (Array.isArray(value)) {
       if (value.length === 0) {
-        this.head = null;
-        this._length = 0;
+        this._head = null;
+        this._size = 0;
       } else {
         let node = new Node(value[0]);
         let current = node;
@@ -20,21 +20,25 @@ export default class CircularSinglyLinkedList<T> implements IList<T> {
           current.next = new Node(value[i]);
           current = current.next!;
         }
-        this.head = current.next = node;
-        this._length = value.length;
+        this._head = current.next = node;
+        this._size = value.length;
       }
     } else if (value !== undefined && value) {
       const node = new Node(value);
-      this.head = node.next = node;
-      this._length = 1;
+      this._head = node.next = node;
+      this._size = 1;
     } else {
-      this.head = null;
-      this._length = 0;
+      this._head = null;
+      this._size = 0;
     }
   }
 
   get size() {
-    return this._length;
+    return this._size;
+  }
+
+  get head() {
+    return this._head;
   }
 
   isInstanceOf(classToCheck: { new (): any }): Boolean {

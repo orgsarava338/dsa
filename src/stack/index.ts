@@ -1,7 +1,7 @@
 import IStack from "./Interface";
 
 export default class Stack<T> implements IStack<T> {
-  elements: T[];
+  private elements: T[];
 
   constructor();
   constructor(element: T);
