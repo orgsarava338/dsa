@@ -1,5 +1,5 @@
 import { INode } from "../Interface";
-import DoublyLinkedList from ".";
+import DoublyLinkedList from "./linear";
 
 export default class Node<T> implements INode<T> {
   value: T | null;

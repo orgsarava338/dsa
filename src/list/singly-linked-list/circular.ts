@@ -1,5 +1,5 @@
-import Node from "../Node";
-import { IList } from "../../Interface";
+import Node from "./Node";
+import { IList } from "../Interface";
 
 export default class CircularSinglyLinkedList<T> implements IList<T> {
   head: Node<T> | null;
