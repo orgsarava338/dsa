@@ -6,8 +6,8 @@ export default class SinglyLinkedList<T> implements IList<T> {
   size: number;
 
   constructor();
-  constructor(value: T);
   constructor(value: T[]);
+  constructor(value: T);
   constructor(value?: T | T[]) {
     if (Array.isArray(value)) {
       if (value.length === 0) {
