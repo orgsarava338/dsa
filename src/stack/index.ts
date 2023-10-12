@@ -1,4 +1,4 @@
-import IStack from "./interface";
+import IStack from "./Interface";
 
 export default class Stack<T> implements IStack<T> {
   elements: T[];
