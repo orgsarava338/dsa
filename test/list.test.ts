@@ -21,6 +21,9 @@ const lists = [
 for (const List of lists) {
   describe(`${List.name} Tests`, () => {
     let list: ListTypes;
+    const listName = List.name
+      .replace(/([a-z0-9])([A-Z])|\s+/g, "$1-$2")
+      .toLowerCase();
     const values = [1, 2, 3, 4, 5];
     const unexpectedLists = lists.filter((e) => e !== List);
 
@@ -29,10 +32,10 @@ for (const List of lists) {
     });
 
     afterAll(() => {
-      console.log(`\n ---------- ${List.name} Tests COmpleted ----------\n`);
+      console.log(`\n ---------- ${listName} Tests Completed ----------\n`);
     });
 
-    test("create a list", () => {
+    test(`create a ${listName}`, () => {
       expect(list.isInstanceOf(List)).toBeTrue();
       unexpectedLists.forEach((listClass) =>
         expect(list.isInstanceOf(listClass)).toBeFalse()
@@ -66,7 +69,7 @@ for (const List of lists) {
       expect(l.toArray()).toBeArrayOfSize(0);
     });
 
-    test("append a value in list", () => {
+    test(`append a value in ${listName}`, () => {
       list.append(values[1]);
       expect(list.isInstanceOf(List)).toBeTrue();
       unexpectedLists.forEach((listClass) =>
@@ -86,7 +89,7 @@ for (const List of lists) {
       expect(list.size).toBe(3);
     });
 
-    test("prepand a value in list", () => {
+    test(`prepand a value in ${listName}`, () => {
       list.prepend(values[1]);
       expect(list.isInstanceOf(List)).toBeTrue();
       unexpectedLists.forEach((listClass) =>
@@ -106,7 +109,7 @@ for (const List of lists) {
       expect(list.size).toBe(3);
     });
 
-    test("insert after a value in list", () => {
+    test(`insert after a value in ${listName}`, () => {
       list.insertAfter(values[0], values[1]);
       expect(list.isInstanceOf(List)).toBeTrue();
       unexpectedLists.forEach((listClass) =>
@@ -126,7 +129,7 @@ for (const List of lists) {
       expect(list.size).toBe(3);
     });
 
-    test("insert before a value in list", () => {
+    test(`insert before a value in ${listName}`, () => {
       list.insertBefore(values[0], values[1]);
       expect(list.isInstanceOf(List)).toBeTrue();
       unexpectedLists.forEach((listClass) =>
@@ -146,7 +149,7 @@ for (const List of lists) {
       expect(list.size).toBe(3);
     });
 
-    test("find a value in list", () => {
+    test(`find a value in ${listName}`, () => {
       expect(list.find(values[0])).not.toBeNull();
       expect(list.find(values[0])?.toArray()).toEqual([values[0]]);
 
@@ -158,7 +161,7 @@ for (const List of lists) {
       expect(list.find(values[2])).toBeNull();
     });
 
-    test("delete a value in list", () => {
+    test(`delete a value in ${listName}`, () => {
       list.append(values[1]);
       list.append(values[2]);
       list.append(values[3]);
@@ -183,19 +186,19 @@ for (const List of lists) {
       expect(list.size).toBe(expected.length);
     });
 
-    test("get head value in list", () => {
+    test(`get head value in ${listName}`, () => {
       expect(list.getHead()).toBe(values[0]);
       list.prepend(values[1]);
       expect(list.getHead()).toBe(values[1]);
     });
 
-    test("get tail value in list", () => {
+    test(`get tail value in ${listName}`, () => {
       expect(list.getTail()).toBe(values[0]);
       list.append(values[1]);
       expect(list.getTail()).toBe(values[1]);
     });
 
-    test("clear the list", () => {
+    test(`clear the ${listName}`, () => {
       expect(list.toArray()).toBeArrayOfSize(1);
 
       list.append(values[1]);
@@ -205,14 +208,14 @@ for (const List of lists) {
       expect(list.size).toBe(0);
     });
 
-    test("is list empty", () => {
+    test(`is ${listName} empty`, () => {
       expect(list.isEmpty()).toBeFalse();
       list.append(values[1]);
       list.clear();
       expect(list.isEmpty()).not.toBeFalse();
     });
 
-    test("convert the list to Array", () => {
+    test(`convert the ${listName} to Array`, () => {
       expect(list.toArray()).toBeArray();
       expect(list.toArray()).toEqual([values[0]]);
       expect(list.toArray()).toBeArrayOfSize(1);
@@ -227,7 +230,7 @@ for (const List of lists) {
       expect(list.toArray()).toBeArrayOfSize(values.length);
     });
 
-    test("reverse the list", () => {
+    test(`reverse the ${listName}`, () => {
       list.reverse();
       expect(list.toArray()).toEqual([values[0]]);
 
