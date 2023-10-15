@@ -49,9 +49,7 @@ export default class SinglyLinkedList<T> implements ISList<T> {
     if (!this._head) this._head = node;
     else {
       let current = this._head;
-      while (current.next) {
-        current = current.next!;
-      }
+      while (current.next) current = current.next!;
       current.next = node;
     }
     this._size++;
