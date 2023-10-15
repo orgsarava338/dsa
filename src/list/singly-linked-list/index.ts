@@ -77,25 +77,25 @@ export default class SinglyLinkedList<T> implements ISList<T> {
   }
 
   insertBefore(before: T, value: T): void {
+    if (!this._head) return;
+
     const node = new Node(value);
 
-    let prev = null;
-    let current = this._head;
-
-    while (current) {
-      if (current.value === before) {
-        if (prev) {
-          node.next = current;
-          prev.next = node;
-        } else {
-          node.next = current;
-          this._head = node;
+    if (this._head?.value === before) {
+      node.next = this._head;
+      this._head = node;
+    } else {
+      let current = this._head;
+      while (current.next) {
+        if (current.next.value === before) {
+          node.next = current.next;
+          current.next = node
+          break
         }
-        break;
+        current = current.next!;
       }
-      prev = current;
-      current = current.next;
     }
+
     this._size++;
   }
 
