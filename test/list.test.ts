@@ -248,6 +248,11 @@ for (const List of lists) {
 
       list.reverse();
       expect(list.toArray().toString()).toEqual(values.reverse().toString());
+
+      expect(list.isInstanceOf(List)).toBeTrue();
+      unexpectedLists.forEach((listClass) =>
+        expect(list.isInstanceOf(listClass)).toBeFalse()
+      );
     });
   });
 }
