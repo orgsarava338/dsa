@@ -58,41 +58,77 @@ export default class CircularDoublyLinkedList<T> implements IDList<T> {
   }
 
   append(value: T): void {
-    throw new Error("Method not implemented.");
+    const node = new Node(value);
+
+    if (!this._head) this._head = node.next = node.prev = node;
+    else {
+      const tail = this._head.prev; // Get the current tail node
+
+      // Adjust the pointers to insert the new node at the end
+      node.prev = tail;
+      node.next = this._head;
+      tail!.next = node;
+      this._head.prev = node;
+    }
+
+    this._size++;
   }
+
   prepend(value: T): void {
     throw new Error("Method not implemented.");
   }
+
   insertAfter(after: T, value: T): void {
     throw new Error("Method not implemented.");
   }
+
   insertBefore(before: T, value: T): void {
     throw new Error("Method not implemented.");
   }
+
   find(value: T): Node<T> | null {
     throw new Error("Method not implemented.");
   }
+
   delete(value: T): void {
     throw new Error("Method not implemented.");
   }
+
   clear(): void {
     this._head = this._tail = null;
   }
+
   isEmpty(): Boolean {
-    throw new Error("Method not implemented.");
+    return this._head === null && this._size === 0;
   }
+
   toArray(): T[] {
-    throw new Error("Method not implemented.");
+    if (!this.head) return [];
+
+    const array: T[] = [];
+
+    let current = this._head;
+
+    do {
+      array.push(current?.value!);
+      current = current?.next!;
+    } while (current !== this._head);
+
+    return array;
   }
+
   getHead(): T | null | undefined {
-    throw new Error("Method not implemented.");
+    return this._head ? this._head.value : null;
   }
+
   getTail(): T | null | undefined {
     throw new Error("Method not implemented.");
   }
+
   reverse(): void {
     throw new Error("Method not implemented.");
   }
+
   print(): void {
     console.log({ list: this.toArray(), size: this._size });
   }
