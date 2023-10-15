@@ -16,7 +16,7 @@ export default class CircularDoublyLinkedList<T> implements ICDList<T> {
         this._size = 0;
       } else {
         let current = (this._head = new Node(value[0]));
-        for (let i = 1; i < value.length && current.next !== this._head; i++) {
+        for (let i = 1; i < value.length; i++) {
           let node = new Node(value[i]);
           current.next = node;
           node.prev = current;

@@ -1,13 +1,14 @@
 import Node from "./Node";
 import { ICSList } from "../Interface";
+import { cursorTo } from "readline";
 
 export default class CircularSinglyLinkedList<T> implements ICSList<T> {
   private _head: Node<T> | null;
   private _size: number;
 
   constructor();
-  constructor(value: T);
   constructor(value: T[]);
+  constructor(value: T);
   constructor(value?: T | T[]) {
     if (Array.isArray(value)) {
       if (value.length === 0) {
@@ -23,7 +24,7 @@ export default class CircularSinglyLinkedList<T> implements ICSList<T> {
         this._head = current.next = node;
         this._size = value.length;
       }
-    } else if (value !== undefined && value) {
+    } else if (value !== undefined) {
       const node = new Node(value);
       this._head = node.next = node;
       this._size = 1;
@@ -47,32 +48,71 @@ export default class CircularSinglyLinkedList<T> implements ICSList<T> {
 
   append(value: T): void {
     const node = new Node(value);
-    if (!this._head) this._head = node.next = node;
-    else if (this._head.next === this._head) {
-      node.next = this._head;
-      this._head.next = node;
-    } else {
+    node.next = this._head;
+
+    if (!this._head) this._head = node;
+    else if (this._head.next === this._head) this._head.next = node;
+    else {
       let current = this._head;
-      do {
-        // console.log(current.toArray());
-        current = current.next!;
-        if (current === this._head) {
-          node.next = this._head;
-          current = node;
-        }
-      } while (current.next !== this._head);
+      do current = current.next!;
+      while (current.next !== this._head);
+      current.next = node;
     }
+
     this._size++;
   }
+
   prepend(value: T): void {
-    throw new Error("Method not implemented.");
+    let node = new Node(value);
+    node.next = this._head;
+    let current = this._head;
+    do current = current?.next!;
+    while (current.next !== this._head);
+    current.next = this._head = node;
+    this._size++;
   }
+
   insertAfter(after: T, value: T): void {
-    throw new Error("Method not implemented.");
+    if (!this._head) return;
+
+    const node = new Node(value);
+
+    let current = this._head;
+    do {
+      if (current?.value === after) {
+        node.next = current.next;
+        current.next = node;
+        break;
+      }
+      current = current?.next!;
+    } while (current !== this._head);
+    this._size++;
   }
+
   insertBefore(before: T, value: T): void {
-    throw new Error("Method not implemented.");
+    if (!this._head) return;
+
+    const node = new Node(value);
+
+    let current = this._head;
+
+    do {
+      if (current.next && current.next.value === before) {
+        node.next = current.next;
+        current.next = node;
+        break;
+      }
+      current = current.next!;
+    } while (current.next !== this._head);
+
+    if (current === this._head && current.value === before) {
+      this._head = node;
+      node.next = current;
+    }
+
+    this._size++;
   }
+
   find(value: T): Node<T> | null {
     throw new Error("Method not implemented.");
   }
