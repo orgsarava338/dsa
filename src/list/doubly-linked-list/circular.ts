@@ -1,7 +1,7 @@
-import { ICDList } from "../Interface";
+import { IDList } from "../Interface";
 import Node from "./Node";
 
-export default class CircularDoublyLinkedList<T> implements ICDList<T> {
+export default class CircularDoublyLinkedList<T> implements IDList<T> {
   private _tail: Node<T> | null;
   private _head: Node<T> | null;
   private _size: number;

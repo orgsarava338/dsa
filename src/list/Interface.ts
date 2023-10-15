@@ -1,13 +1,14 @@
 import CommonMethods from "../CommonMethds";
 import SNode from "./singly-linked-list/Node";
 import DNode from "./doubly-linked-list/Node";
-import CSNode from "./circular-singly-linked-list/Node";
-import CDNode from "./circular-doubly-linked-list/Node";
 
-export interface INode<T> {
+export interface ISNode<T> {
   value: T | null;
-  toArray(): T[];
-  print(): void;
+  next: SNode<T> | null;
+}
+
+export interface IDNode<T> extends ISNode<T> {
+  prev: DNode<T> | null;
 }
 
 export interface ISList<T> extends CommonMethods<T> {
@@ -24,16 +25,8 @@ export interface ISList<T> extends CommonMethods<T> {
   getTail(): T | null | undefined;
 }
 
-export interface ICSList<T> extends ISList<T> {
-  find(value: T): CSNode<T> | null;
-}
-
 export interface IDList<T> extends ISList<T> {
   readonly tail: DNode<T> | null;
 
   find(value: T): DNode<T> | null;
-}
-
-export interface ICDList<T> extends IDList<T> {
-  find(value: T): CDNode<T> | null;
 }

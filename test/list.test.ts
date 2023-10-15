@@ -1,8 +1,8 @@
 import { afterAll, beforeEach, describe, expect, test } from "bun:test";
-import SinglyLinkedList from "../src/list/singly-linked-list";
-import DoublyLinkedList from "../src/list/doubly-linked-list";
-import CircularSinglyLinkedList from "../src/list/circular-singly-linked-list";
-import CircularDoublyLinkedList from "../src/list/circular-doubly-linked-list";
+import SinglyLinkedList from "../src/list/singly-linked-list/linear";
+import DoublyLinkedList from "../src/list/doubly-linked-list/linear";
+import CircularSinglyLinkedList from "../src/list/singly-linked-list/circular";
+import CircularDoublyLinkedList from "../src/list/doubly-linked-list/circular";
 
 type T = number;
 type ListTypes =
@@ -156,19 +156,13 @@ for (const List of lists) {
 
     test(`find a value in ${listName}`, () => {
       expect(list.find(values[0])).not.toBeNull();
-      expect(list.find(values[0])?.toArray().toString()).toEqual(
-        [values[0]].toString()
-      );
+      expect(list.find(values[0])?.value).toBe(values[0]);
 
       list.append(values[1]);
 
-      expect(list.find(values[0])?.toArray().toString()).toEqual(
-        [values[0], values[1]].toString()
-      );
+      expect(list.find(values[0])?.value).toBe(values[0]);
 
-      expect(list.find(values[1])?.toArray().toString()).toEqual(
-        [values[1]].toString()
-      );
+      expect(list.find(values[1])?.value).toBe(values[1]);
 
       expect(list.find(values[2])).toBeNull();
     });

@@ -1,8 +1,7 @@
 import Node from "./Node";
-import { ICSList } from "../Interface";
-import { cursorTo } from "readline";
+import { ISList } from "../Interface";
 
-export default class CircularSinglyLinkedList<T> implements ICSList<T> {
+export default class CircularSinglyLinkedList<T> implements ISList<T> {
   private _head: Node<T> | null;
   private _size: number;
 
@@ -114,10 +113,24 @@ export default class CircularSinglyLinkedList<T> implements ICSList<T> {
   }
 
   find(value: T): Node<T> | null {
-    throw new Error("Method not implemented.");
+    if (!this._head) return null;
+    let current = this._head;
+    do {
+      if (current.value === value) return current;
+      current = current.next!;
+    } while (current !== this._head);
+    return null;
   }
+
   delete(value: T): void {
-    throw new Error("Method not implemented.");
+    if (!this._head) return;
+    let current = this._head
+    do {
+      if (current.value === value) {
+        // 
+      }
+      current = current.next!
+    } while (current !==this._head);
   }
 
   clear(): void {
