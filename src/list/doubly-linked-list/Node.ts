@@ -1,10 +1,9 @@
 import { INode } from "../Interface";
-import DoublyLinkedList from "./linear";
 
-export default class Node<T> implements INode<T> {
+export default class DNode<T> implements INode<T> {
   value: T | null;
-  next: Node<T> | null;
-  prev: Node<T> | null;
+  next: DNode<T> | null;
+  prev: DNode<T> | null;
 
   constructor(value: T) {
     this.value = value;

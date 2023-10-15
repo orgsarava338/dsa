@@ -1,7 +1,7 @@
 import Node from "./Node";
-import { IList } from "../Interface";
+import { ISList } from "../Interface";
 
-export default class SinglyLinkedList<T> implements IList<T> {
+export default class SinglyLinkedList<T> implements ISList<T> {
   private _head: Node<T> | null;
   private _size: number;
 

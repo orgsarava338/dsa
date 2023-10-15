@@ -1,34 +1,42 @@
+import { ICDList } from "../Interface";
 import Node from "./Node";
-import { IList } from "../Interface";
 
-export default class CircularSinglyLinkedList<T> implements IList<T> {
+export default class CircularDoublyLinkedList<T> implements ICDList<T> {
+  private _tail: Node<T> | null;
   private _head: Node<T> | null;
   private _size: number;
 
   constructor();
-  constructor(value: T);
   constructor(value: T[]);
+  constructor(value: T);
   constructor(value?: T | T[]) {
-    if (Array.isArray(value)) {
+    if (Array.isArray(value))
       if (value.length === 0) {
-        this._head = null;
+        this._head = this._tail = null;
         this._size = 0;
       } else {
-        let node = new Node(value[0]);
-        let current = node;
-        for (let i = 1; i < value.length; i++) {
-          current.next = new Node(value[i]);
-          current = current.next!;
+        let current = (this._head = new Node(value[0]));
+        for (let i = 1; i < value.length && current.next !== this._head; i++) {
+          let node = new Node(value[i]);
+          current.next = node;
+          node.prev = current;
+          current = node;
         }
-        this._head = current.next = node;
+        this._head.prev = this._tail = current;
+        this._tail.next = this._head;
         this._size = value.length;
       }
-    } else if (value !== undefined && value) {
+    else if (value !== undefined) {
       const node = new Node(value);
-      this._head = node.next = node;
+      this._head = this._tail = node;
+      this._head.next =
+        this._tail.next =
+        this._head.prev =
+        this._tail.prev =
+          node;
       this._size = 1;
     } else {
-      this._head = null;
+      this._head = this._tail = null;
       this._size = 0;
     }
   }
@@ -39,6 +47,10 @@ export default class CircularSinglyLinkedList<T> implements IList<T> {
 
   get head() {
     return this._head;
+  }
+
+  get tail() {
+    return this._tail;
   }
 
   isInstanceOf(classToCheck: { new (): any }): Boolean {
@@ -64,7 +76,7 @@ export default class CircularSinglyLinkedList<T> implements IList<T> {
     throw new Error("Method not implemented.");
   }
   clear(): void {
-    throw new Error("Method not implemented.");
+    this._head = this._tail = null;
   }
   isEmpty(): Boolean {
     throw new Error("Method not implemented.");
@@ -81,7 +93,6 @@ export default class CircularSinglyLinkedList<T> implements IList<T> {
   reverse(): void {
     throw new Error("Method not implemented.");
   }
-  
   print(): void {
     console.log({ list: this.toArray(), size: this._size });
   }

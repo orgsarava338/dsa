@@ -1,7 +1,7 @@
+import { IDList } from "../Interface";
 import Node from "./Node";
-import IList from "./Interface";
 
-export default class DoublyLinkedList<T> implements IList<T> {
+export default class DoublyLinkedList<T> implements IDList<T> {
   private _head: Node<T> | null;
   private _tail: Node<T> | null;
   private _size: number;
@@ -167,7 +167,7 @@ export default class DoublyLinkedList<T> implements IList<T> {
   getHead(): T | null | undefined {
     return this._head?.value;
   }
-  
+
   getTail(): T | null | undefined {
     return this._tail?.value;
   }
