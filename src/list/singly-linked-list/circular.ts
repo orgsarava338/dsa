@@ -123,14 +123,38 @@ export default class CircularSinglyLinkedList<T> implements ISList<T> {
   }
 
   delete(value: T): void {
-    if (!this._head) return;
-    let current = this._head
-    do {
-      if (current.value === value) {
-        // 
+    if (!this._head) return; // Empty list
+
+    // Handle the case where the node to be deleted is the head
+    if (this._head.value === value) {
+      this._size--;
+
+      if (this._head.next === this._head) {
+        // If there is only one node in the list
+        this._head = null;
+        return;
       }
-      current = current.next!
-    } while (current !==this._head);
+
+      // If there are multiple nodes in the list, update the head
+      let current = this._head;
+
+      while (current.next !== this._head) current = current.next!;
+      this._head = this._head.next;
+      current.next = this._head;
+
+      return;
+    }
+
+    // Search for the node to delete in the list
+    let current = this._head;
+    while (current.next !== this._head) {
+      if (current.next!.value === value) {
+        current.next = current.next!.next;
+        this._size--;
+        return;
+      }
+      current = current.next!;
+    }
   }
 
   clear(): void {
@@ -167,7 +191,21 @@ export default class CircularSinglyLinkedList<T> implements ISList<T> {
   }
 
   reverse(): void {
-    throw new Error("Method not implemented.");
+    if (!this._head || this._size < 2) return; // No need to reverse if there are 0 or 1 nodes
+
+    let current = this._head,
+      prev,
+      next = null;
+
+    do {
+      next = current.next;
+      current.next = prev!;
+      prev = current;
+      current = next!;
+    } while (current !== this._head);
+
+    this._head = prev; // Update the head to the last node (prev)
+    current.next = this._head; // point the last(current) node's next node to the head
   }
 
   print(): void {
