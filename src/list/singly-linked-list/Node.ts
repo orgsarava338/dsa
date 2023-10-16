@@ -1,8 +1,8 @@
 import { ISNode } from "../Interface";
 
-export default class Node<T> implements ISNode<T> {
+export default class SNode<T> implements ISNode<T> {
   value: T | null;
-  next: Node<T> | null;
+  next: SNode<T> | null;
 
   constructor(value: T) {
     this.value = value;
