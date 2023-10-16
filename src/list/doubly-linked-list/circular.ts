@@ -60,22 +60,26 @@ export default class CircularDoublyLinkedList<T> implements IDList<T> {
   append(value: T): void {
     const node = new Node(value);
 
-    if (!this._head) this._head = node.next = node.prev = node;
+    if (!this._head) this._head = this._tail = node.next = node.prev = node;
     else {
-      const tail = this._head.prev; // Get the current tail node
-
-      // Adjust the pointers to insert the new node at the end
-      node.prev = tail;
+      node.prev = this._tail;
       node.next = this._head;
-      tail!.next = node;
-      this._head.prev = node;
+      this._head.prev = this._tail!.next = this._tail = node;
     }
 
     this._size++;
   }
 
   prepend(value: T): void {
-    throw new Error("Method not implemented.");
+    const node = new Node(value);
+
+    if (!this._head) this._head = this._tail = node.next = node.prev = node;
+    else {
+      node.next = this._head;
+      node.prev = this._tail;
+      this._head.prev = this._tail!.next = this._head = node;
+    }
+    this._size++;
   }
 
   insertAfter(after: T, value: T): void {
