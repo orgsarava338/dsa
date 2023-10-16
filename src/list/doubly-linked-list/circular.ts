@@ -83,27 +83,89 @@ export default class CircularDoublyLinkedList<T> implements IDList<T> {
   }
 
   insertAfter(after: T, value: T): void {
-    throw new Error("Method not implemented.");
+    if (!this._head) return;
+
+    const node = new Node(value);
+    let current = this._head;
+
+    do {
+      if (current.value === after) {
+        node.next = current.next;
+        node.prev = current;
+        current.next = node;
+        this._size++;
+        return;
+      }
+      current = current.next!;
+    } while (current.next !== this._head);
   }
 
   insertBefore(before: T, value: T): void {
-    throw new Error("Method not implemented.");
+    if (!this._head) return; // Empty list
+
+    const node = new Node(value);
+    let current = this._head;
+
+    do {
+      if (current.value === before) {
+        // Found the target node to insert before
+        node.prev = current.prev;
+        node.next = current;
+        current.prev!.next = node;
+        current.prev = node;
+
+        if (current === this._head)
+          // If inserting before the head, update the head to the new node
+          this._head = node;
+
+        this._size++;
+        return;
+      }
+      current = current.next!;
+    } while (current !== this._head);
   }
 
   find(value: T): Node<T> | null {
-    throw new Error("Method not implemented.");
+    if (!this._head) return null;
+    let current = this._head;
+    do {
+      if (current.value === value) return current;
+      current = current.next!;
+    } while (current !== this._head);
+    return null;
   }
 
   delete(value: T): void {
-    throw new Error("Method not implemented.");
+    if (!this._head) return;
+
+    let current = this._head;
+
+    do {
+      if (current.value === value) {
+        if (current === this._head && this._size === 0) {
+          this._head = null;
+          break;
+        } else {
+          current.prev!.next = current.next;
+          current.next!.prev = current.prev;
+          if (current === this._head) this._head = current.next!;
+          break;
+        }
+      }
+
+      current = current.next!;
+    } while (current !== this._head);
+
+    this._size--;
   }
 
   clear(): void {
     this._head = this._tail = null;
+    this._size = 0;
   }
 
   isEmpty(): Boolean {
-    return this._head === null && this._size === 0;
+    return this._head === null && this._tail === null && this._size === 0;
   }
 
   toArray(): T[] {
@@ -126,11 +188,22 @@ export default class CircularDoublyLinkedList<T> implements IDList<T> {
   }
 
   getTail(): T | null | undefined {
-    throw new Error("Method not implemented.");
+    return this._tail ? this._tail.value : null;
   }
 
   reverse(): void {
-    throw new Error("Method not implemented.");
+    if (!this._head || this._size < 2) return;
+
+    let current = this._head;
+
+    do {
+      let temp = current.next;
+      current.next = current.prev;
+      current.prev = temp;
+
+      current = current.prev!;
+    } while (current !== this._head);
+    this._head = current.next;
   }
 
   print(): void {
