@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "bun --watch main.ts",
     "start": "bun main.ts",
-    "test": "bun test"
+    "test": "bun test -t"
   },
   "devDependencies": {
     "bun-types": "latest"
