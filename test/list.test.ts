@@ -21,18 +21,18 @@ const lists = [
 for (const List of lists) {
   describe(`${List.name} Tests`, () => {
     let list: ListTypes;
-    const listName = List.name
+    let listName = List.name
       .replace(/([a-z0-9])([A-Z])|\s+/g, "$1-$2")
       .toLowerCase();
-    const values = [1, 2, 3, 4, 5];
-    const unexpectedLists = lists.filter((e) => e !== List);
+    let values = [1, 2, 3, 4, 5];
+    let unexpectedLists = lists.filter((e) => e !== List);
 
     beforeEach(() => {
       list = new List(values[0]);
     });
 
     afterAll(() => {
-      console.log(`\n ---------- ${listName} Tests Completed ----------\n`);
+      console.log(`\n---------- ${listName} Tests Completed ----------\n`);
     });
 
     test(`create a ${listName}`, () => {
@@ -155,16 +155,21 @@ for (const List of lists) {
     });
 
     test(`find a value in ${listName}`, () => {
-      expect(list.find(values[0])).not.toBeNull();
-      expect(list.find(values[0])?.value).toBe(values[0]);
+      const node = list.find(values[0]);
+
+      expect(node).not.toBeNull();
+      expect(node!.value).toBe(values[0]);
 
       list.append(values[1]);
 
-      expect(list.find(values[0])?.value).toBe(values[0]);
+      const node0 = list.find(values[0]);
+      expect(node0!.value).toBe(values[0]);
 
-      expect(list.find(values[1])?.value).toBe(values[1]);
+      const node1 = list.find(values[1]);
+      expect(node1!.value).toBe(values[1]);
 
-      expect(list.find(values[2])).toBeNull();
+      const node2 = list.find(values[2]);
+      expect(node2).toBeNull();
     });
 
     test(`delete a value in ${listName}`, () => {
