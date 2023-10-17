@@ -10,12 +10,15 @@ describe("Stack Tests", () => {
   });
 
   test("create a stack", () => {
+    expect(stack.isInstanceOf(Stack)).toBeTrue();
     expect(stack.toArray()).toEqual([elements[0]]);
 
     let s = new Stack();
+    expect(s.isInstanceOf(Stack)).toBeTrue();
     expect(s.toArray()).toBeArrayOfSize(0);
 
     let st = new Stack(elements);
+    expect(st.isInstanceOf(Stack)).toBeTrue();
     expect(st.toArray()).toEqual(elements);
     expect(st.size).toBe(elements.length);
   });
@@ -80,10 +83,10 @@ describe("Stack Tests", () => {
     stack.push(elements);
 
     let expected = [elements[0], ...elements];
-    
+
     expect(stack.size).toBe(expected.length);
     stack.pop();
-    expect(stack.size).toBe(expected.length -1);
+    expect(stack.size).toBe(expected.length - 1);
   });
 
   test("stack to array", () => {
@@ -117,7 +120,8 @@ describe("Stack Tests", () => {
   test("clone a stack", () => {
     stack.push(elements);
     const cloned = stack.clone();
-
+    
+    expect(cloned.isInstanceOf(Stack)).toBeTrue();
     expect(cloned.toArray()).toEqual([elements[0], ...elements]);
     expect(typeof stack).toEqual(typeof cloned);
   });
