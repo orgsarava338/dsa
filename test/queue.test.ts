@@ -10,15 +10,17 @@ describe("Queue Tests", () => {
   });
 
   test("create a queue", () => {
-    
+    expect(queue.isInstanceOf(Queue)).toBeTrue();
     expect(queue.elements).toEqual([elements[0]]);
     expect(queue.size).toBe(1);
 
     let q = new Queue(elements);
+    expect(q.isInstanceOf(Queue)).toBeTrue();
     expect(q.elements).toEqual(elements);
     expect(q.size).toBe(elements.length);
 
     let qu = new Queue();
+    expect(qu.isInstanceOf(Queue)).toBeTrue();
     expect(qu.elements).toBeArrayOfSize(0);
   });
 
@@ -105,11 +107,14 @@ describe("Queue Tests", () => {
   test("concat the queue", () => {
     queue.concat(new Queue<number>([...elements]));
     expect(queue.elements).toEqual([elements[0], ...elements]);
+    expect(queue.isInstanceOf(Queue)).toBeTrue();
   });
 
   test("clone a queue", () => {
     queue.enqueue(elements);
     let cloned = queue.clone();
+
+    expect(cloned.isInstanceOf(Queue)).toBeTrue();
     expect(cloned.elements).toEqual([elements[0], ...elements]);
     expect(typeof queue).toEqual(typeof cloned);
   });
