@@ -1,6 +1,5 @@
 import Queue from ".";
-import CommonMethods from "../CommonMethds";
-export interface IQueue<T> extends CommonMethods<T> {
+export interface IQueue<T> {
   enqueue(element: T | T[]): void;
   dequeue(): T | undefined;
   dequeueMany(count: number): T[];
@@ -14,4 +13,10 @@ export interface IQueue<T> extends CommonMethods<T> {
   print(): void;
   forEach(callback: (element: T) => void): void;
   filter(callback: (element: T) => Boolean): Queue<T>;
+  isInstanceOf(classToCheck: { new (): any }): Boolean;
+  isEmpty(): Boolean;
+  clear(): void;
+  toArray(): T[];
+  reverse(): void;
+  print(): void;
 }

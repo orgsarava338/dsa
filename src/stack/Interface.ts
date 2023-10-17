@@ -1,7 +1,7 @@
 import Stack from ".";
-import CommonMethods from "../CommonMethds";
 
-export default interface IStack<T> extends CommonMethods<T>{
+export default interface IStack<T> {
+  isInstanceOf(classToCheck: { new (): any }): Boolean;
   push(element: T | T[]): void;
   pop(): T | undefined;
   peek(): T | undefined;
@@ -10,4 +10,9 @@ export default interface IStack<T> extends CommonMethods<T>{
   contains(element: T): boolean;
   clone(): Stack<T>;
   toArrayReversed(): T[];
+  isEmpty(): Boolean;
+  clear(): void;
+  toArray(): T[];
+  reverse(): void;
+  print(): void;
 }
