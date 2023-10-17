@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "bun:test";
-import Queue from "../src/queue";
+import Queue from "../src/queue/";
 
 describe("Queue Tests", () => {
   const elements = [1, 2, 3, 4, 5];
@@ -10,6 +10,7 @@ describe("Queue Tests", () => {
   });
 
   test("create a queue", () => {
+    
     expect(queue.elements).toEqual([elements[0]]);
     expect(queue.size).toBe(1);
 

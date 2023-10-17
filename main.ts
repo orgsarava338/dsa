@@ -1,5 +1,5 @@
 import Stack from "./src/stack";
-import Queue from "./src/queue";
+import Queue from "./src/queue/Queue";
 import SinglyLinkedList from "./src/list/singly-linked-list/linear";
 import DoublyLinkedList from "./src/list/doubly-linked-list/linear";
 import CircularSinglyLinkedList from "./src/list/singly-linked-list/circular";

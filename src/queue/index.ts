@@ -1,19 +1,23 @@
-import { IQueue } from "./Interface";
+import IQueue from "./Interface";
 
 export default class Queue<T> implements IQueue<T> {
-  private elements: T[];
+  private _elements: T[];
 
   constructor();
   constructor(element: T);
   constructor(element: T[]);
   constructor(element?: T | T[]) {
-    if (Array.isArray(element)) this.elements = element;
-    else if (element) this.elements = [element];
-    else this.elements = [];
+    if (Array.isArray(element)) this._elements = element;
+    else if (element) this._elements = [element];
+    else this._elements = [];
   }
 
   get size() {
-    return this.elements.length;
+    return this._elements.length;
+  }
+
+  get elements() {
+    return this._elements;
   }
 
   isInstanceOf(classToCheck: { new (): any }): Boolean {
@@ -21,75 +25,76 @@ export default class Queue<T> implements IQueue<T> {
   }
 
   enqueue(element: T | T[]): void {
-    if (Array.isArray(element)) this.elements = [...this.elements, ...element];
-    else this.elements.push(element);
+    if (Array.isArray(element))
+      this._elements = [...this._elements, ...element];
+    else this._elements.push(element);
   }
 
   dequeue(): T | undefined {
-    return this.elements.shift();
+    return this._elements.shift();
   }
 
   dequeueMany(count: number): T[] {
     if (count <= 0) return [];
     let dequeued: T[] = [];
-    while (count > 0 && this.elements.length > 0) {
-      dequeued.push(this.elements.shift()!);
+    while (count > 0 && this._elements.length > 0) {
+      dequeued.push(this._elements.shift()!);
       count--;
     }
     return dequeued;
   }
 
   peek(): T | undefined {
-    return this.elements.length > 0 ? this.elements[0] : undefined;
+    return this._elements.length > 0 ? this._elements[0] : undefined;
   }
 
   isEmpty(): Boolean {
-    return this.elements.length === 0;
+    return this._elements.length === 0;
   }
 
   getFront(): T | undefined {
-    return this.elements[0];
+    return this._elements[0];
   }
 
   getBack(): T | undefined {
-    return this.elements[this.elements.length - 1];
+    return this._elements[this._elements.length - 1];
   }
 
   clear(): void {
-    this.elements = [];
+    this._elements = [];
   }
 
   concat(queue: Queue<T>): void {
-    this.elements = [...this.elements, ...queue.elements];
+    this._elements = [...this._elements, ...queue._elements];
   }
 
   clone(): Queue<T> {
-    return new Queue<T>([...this.elements]);
+    return new Queue<T>(this._elements);
   }
 
   reverse(): void {
-    this.elements = [...this.elements.reverse()];
+    this._elements = [...this._elements.reverse()];
   }
 
   toArray(): T[] {
-    return this.elements;
+    return this._elements;
   }
 
   toString(): string {
-    return this.elements.toString();
+    return this._elements.toString();
   }
 
   print(): void {
-    console.log({ elements: this.elements, size: this.size });
+    console.log({ _elements: this._elements, size: this.size });
   }
 
   forEach(callback: (element: T) => void): void {
-    for (let element of this.elements) callback(element);
+    for (let element of this._elements) callback(element);
   }
 
   filter(callback: (element: T) => Boolean): Queue<T> {
     const filtered = new Queue<T>();
-    for (let element of this.elements)
+    for (let element of this._elements)
       if (callback(element)) filtered.enqueue(element);
     return filtered;
   }
