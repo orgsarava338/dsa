@@ -213,7 +213,7 @@ export default class CircularDoublyLinkedList<T> implements IDList<T> {
       if (current !== this._tail) listString += current!.value + " = ";
       else listString += current!.value;
       current = current!.next
-    } while (current!.next !== this._head);
+    } while (current !== this._head);
     listString += " <= ]";
     console.log(listString);
   }
