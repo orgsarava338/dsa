@@ -176,6 +176,15 @@ export default class SinglyLinkedList<T> implements ISList<T> {
   }
 
   print(): void {
-    console.log({ list: this.toArray(), size: this._size });
+    let current = this._head;
+    let listString = "[ -> ";
+    while (current) {
+      if (current.next) listString += current.value + " - ";
+      else listString += current.value;
+
+      current = current.next!;
+    }
+    listString += " ]";
+    console.log(listString);
   }
 }

@@ -14,13 +14,7 @@ const dl = new DoublyLinkedList(values);
 const scl = new CircularSinglyLinkedList(values);
 const dcl = new CircularDoublyLinkedList(values);
 
-scl.print()
-scl.reverse()
-// console.log(scl);
-
-let current = scl.head 
-do {
-  console.log(current)
-    current = current?.next!;
-  
-} while (current.next !== scl.head);
+sl.print()
+scl.print();
+dl.print()
+dcl.print()
