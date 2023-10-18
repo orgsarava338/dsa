@@ -26,6 +26,7 @@ export interface ISList<T> {
   isEmpty(): Boolean;
   clear(): void;
   toArray(): T[];
+  toString(): string;
   reverse(): void;
   print(): void;
 }

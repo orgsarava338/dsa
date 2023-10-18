@@ -177,6 +177,18 @@ export default class CircularSinglyLinkedList<T> implements ISList<T> {
     return array;
   }
 
+  toString(): string {
+    if (!this._head) return "[ -> <- ]";
+    let current = this._head;
+    let listString = "[ -> ";
+    do {
+      if (current!.next !== this._head) listString += current!.value + " - ";
+      else listString += current!.value;
+      current = current!.next!;
+    } while (current !== this._head);
+    return (listString += " <- ]");
+  }
+
   getHead(): T | null | undefined {
     return this._head?.value;
   }
@@ -209,15 +221,6 @@ export default class CircularSinglyLinkedList<T> implements ISList<T> {
   }
 
   print(): void {
-    let current = this._head;
-    let listString = "[ -> ";
-    do {
-      if (current!.next !== this._head) listString += current!.value + " - ";
-      else listString += current!.value;
-      current = current!.next!;
-    } while (current !== this._head);
-    listString += " <- ]";
-    console.log(listString);
-    
+    console.log(this.toString());
   }
 }

@@ -183,6 +183,18 @@ export default class CircularDoublyLinkedList<T> implements IDList<T> {
     return array;
   }
 
+  toString(): string {
+    if (!this._head) return "[ => <= ]";
+    let current = this._head;
+    let listString = "[ => ";
+    do {
+      if (current !== this._tail) listString += current!.value + " = ";
+      else listString += current!.value;
+      current = current!.next!;
+    } while (current !== this._head);
+    return (listString += " <= ]");
+  }
+
   getHead(): T | null | undefined {
     return this._head ? this._head.value : null;
   }
@@ -207,14 +219,6 @@ export default class CircularDoublyLinkedList<T> implements IDList<T> {
   }
 
   print(): void {
-    let current = this._head;
-    let listString = "[ => ";
-    do {
-      if (current !== this._tail) listString += current!.value + " = ";
-      else listString += current!.value;
-      current = current!.next
-    } while (current !== this._head);
-    listString += " <= ]";
-    console.log(listString);
+    console.log(this.toString());
   }
 }

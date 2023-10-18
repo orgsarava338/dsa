@@ -1,3 +1,4 @@
+import { toNamespacedPath } from "path";
 import { IDList } from "../Interface";
 import Node from "./Node";
 
@@ -185,6 +186,18 @@ export default class DoublyLinkedList<T> implements IDList<T> {
     return array;
   }
 
+  toString(): string {
+    if (!this._head) return "[ => ]";
+    let current = this._head;
+    let listString = "[ => ";
+    while (current) {
+      if (current.next) listString += current.value + " = ";
+      else listString += current.value;
+      current = current.next!;
+    }
+    return (listString += " ]");
+  }
+
   reverse(): void {
     let current = this._head;
     let temp: Node<T> | null = null;
@@ -200,15 +213,6 @@ export default class DoublyLinkedList<T> implements IDList<T> {
   }
 
   print(): void {
-    let current = this._head;
-    let listString = "[ => ";
-    while (current) {
-      if (current.next) listString += current.value + " = ";
-      else listString += current.value;
-      current = current.next;
-    }
-    listString += " ]";
-    console.log(listString);
-    
+    console.log(this.toString());
   }
 }

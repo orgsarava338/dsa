@@ -89,8 +89,8 @@ export default class SinglyLinkedList<T> implements ISList<T> {
       while (current.next) {
         if (current.next.value === before) {
           node.next = current.next;
-          current.next = node
-          break
+          current.next = node;
+          break;
         }
         current = current.next!;
       }
@@ -162,6 +162,19 @@ export default class SinglyLinkedList<T> implements ISList<T> {
     return array;
   }
 
+  toString(): string {
+    if (!this._head) return "[ -> ]";
+    let current = this._head;
+    let listString = "[ -> ";
+    while (current) {
+      if (current.next) listString += current.value + " - ";
+      else listString += current.value;
+
+      current = current.next!;
+    }
+    return (listString += " ]");
+  }
+
   reverse(): void {
     let prev = null,
       next = null,
@@ -176,15 +189,6 @@ export default class SinglyLinkedList<T> implements ISList<T> {
   }
 
   print(): void {
-    let current = this._head;
-    let listString = "[ -> ";
-    while (current) {
-      if (current.next) listString += current.value + " - ";
-      else listString += current.value;
-
-      current = current.next!;
-    }
-    listString += " ]";
-    console.log(listString);
+    console.log(this.toString());
   }
 }

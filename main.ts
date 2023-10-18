@@ -9,12 +9,12 @@ const values = [1, 2, 3, 4, 5];
 
 const s = new Stack(values);
 const q = new Queue(values);
-const sl = new SinglyLinkedList(values);
-const dl = new DoublyLinkedList(values);
-const scl = new CircularSinglyLinkedList(values);
-const dcl = new CircularDoublyLinkedList(values);
+const sl = new SinglyLinkedList([1,2]);
+const dl = new DoublyLinkedList([1,2]);
+const scl = new CircularSinglyLinkedList([1,2]);
+const dcl = new CircularDoublyLinkedList([1,2]);
 
 sl.print()
-scl.print();
 dl.print()
+scl.print();
 dcl.print()
