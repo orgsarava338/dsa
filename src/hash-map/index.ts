@@ -1,22 +1,25 @@
 import { IHashMap } from "./Interfacce";
 
 export default class HashMap<K, V> implements IHashMap<K, V> {
-  readonly elements: V[];
+  readonly _keys: Set<K>;
+  readonly _elements: V[];
 
   constructor() {
-    this.elements = [];
+    this._keys = new Set();
+    this._elements = [];
   }
 
   isInstanceOf(classToCheck: new () => any): Boolean {
     return this instanceof classToCheck;
   }
 
-  hash(ket: K): number {
+  hash(key: K): number {
     throw new Error("Method not implemented.");
   }
 
-  put(ket: K, value: V): void {
-    throw new Error("Method not implemented.");
+  put(key: K, value: V): void {
+    if (this._keys.has(key)) return;
+    
   }
 
   get(key: K): V | undefined {
@@ -29,10 +32,10 @@ export default class HashMap<K, V> implements IHashMap<K, V> {
   remove(key: K): void {
     throw new Error("Method not implemented.");
   }
-  keys(): K[] {
+  getKeys(): K[] {
     throw new Error("Method not implemented.");
   }
-  values(): V[] {
+  getValues(): V[] {
     throw new Error("Method not implemented.");
   }
   size(): number {
