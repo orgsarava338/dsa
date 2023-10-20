@@ -1,6 +1,7 @@
 export interface IHashMap<K, V> {
   readonly _keys: Set<K>;
-  readonly _elements: V[];
+  readonly _values: V[];
+  readonly _size: number;
 
   isInstanceOf(classToCheck: { new (): any }): Boolean;
   hash(key: K): number;
