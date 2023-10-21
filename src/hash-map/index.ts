@@ -1,42 +1,37 @@
 import { IHashMap } from "./Interfacce";
 
 export default class HashMap<K, V> implements IHashMap<K, V> {
-  private _keys: Set<K>;
-  private _values: V[];
+  private _bucket: Array<Array<[K, V]>>;
   private _size: number;
 
-  constructor() {
-    this._keys = new Set();
-    this._values = [];
-    this._size = 0;
-  }
-
-  get keys(): Set<K> {
-    return this._keys;
-  }
-
-  get values(): V[] {
-    return this._values;
+  constructor(size: number = 0) {
+    this._size = size;
+    this._bucket = [];
   }
 
   get size(): number {
     return this._size;
   }
 
+  private hash(key: K): number {
+    let keyStr = String(key);
+    let hashCode = 0;
+    for (let i = 0; i < keyStr.length; i++)
+      hashCode = (hashCode << 5) - hashCode + keyStr.charCodeAt(i);
+    return hashCode % this._size;
+  }
+
   isInstanceOf(classToCheck: new () => any): Boolean {
     return this instanceof classToCheck;
   }
 
-  hash(key: K): number {
-    throw new Error("Method not implemented.");
-  }
-
   put(key: K, value: V): void {
-    if (this._keys.has(key)) return;
+    if (this.has(key)) {
+    } else this._bucket.push([[key, value]]);
   }
 
   get(key: K): V | undefined {
-    throw new Error("Method not implemented.");
+    if (!this.has(key)) return;
   }
 
   has(key: K): Boolean {
@@ -52,8 +47,7 @@ export default class HashMap<K, V> implements IHashMap<K, V> {
   }
 
   clear(): void {
-    this._keys.clear();
-    this._values = [];
+    this._bucket = [];
     this._size = 0;
   }
 }
