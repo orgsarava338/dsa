@@ -2,6 +2,7 @@
   "name": "dsa",
   "module": "main.ts",
   "type": "module",
+  "author": "sarava338",
   "scripts": {
     "dev": "npx bun --watch main.ts",
     "start": "npx bun main.ts",
