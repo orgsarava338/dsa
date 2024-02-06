@@ -1,5 +1,6 @@
 {
   "name": "dsa",
+  "version": "1.0.0",
   "module": "main.ts",
   "type": "module",
   "author": "sarava338",
