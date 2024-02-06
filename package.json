@@ -3,11 +3,12 @@
   "module": "main.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun --watch main.ts",
-    "start": "bun main.ts",
-    "test": "bun test -t"
+    "dev": "npx bun --watch main.ts",
+    "start": "npx bun main.ts",
+    "test": "npx bun test"
   },
   "devDependencies": {
+    "bun": "^1.0.26",
     "bun-types": "latest"
   },
   "peerDependencies": {
