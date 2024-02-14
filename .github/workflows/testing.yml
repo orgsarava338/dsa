@@ -2,7 +2,7 @@ name: Unit Tests
 
 on:
   pull_request:
-    branches: [ "*" ]
+    branches: [ "main" ]
   # push:
   #   branches: [ "main" ]
 
@@ -34,7 +34,15 @@ jobs:
           node-version: ${{matrix.node-version}}
 
       - name: npm install
+      - uses: actions/checkout@v3
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
         run : npm ci
 
       - name: npm test
+      - uses: actions/checkout@v3
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
         run: npm test 
