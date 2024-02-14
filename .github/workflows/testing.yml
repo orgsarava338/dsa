@@ -9,13 +9,13 @@ on:
 jobs: 
   tests:
     name: Tests
-    runs-on: ${{matrix.machines}}
 
     strategy:
       matrix:
         machines: [ubuntu-latest]
         node-version : [20.x]
 
+    runs-on: ${{matrix.machines}}
     timeout-minutes: 360
     permissions:
       security-events: write
@@ -31,7 +31,7 @@ jobs:
           node-version: ${{matrix.node-version}}
 
       - name: npm install
-        run : npm ci
+      - run : npm ci
 
       - name: npm test
-        run: npm test 
+      - run: npm test 
