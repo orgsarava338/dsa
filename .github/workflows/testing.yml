@@ -31,7 +31,13 @@ jobs:
           node-version: ${{matrix.node-version}}
 
       - name: npm install
-      - run : npm ci
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+        run : npm ci
 
       - name: npm test
-      - run: npm test 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+        run: npm test 
