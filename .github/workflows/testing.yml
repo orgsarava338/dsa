@@ -28,20 +28,20 @@ jobs:
     
     steps: 
       - name: Test with Node.js ${{matrix.node-versions}} in ${{matrix.machines}}
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
         uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}
 
       - name: npm install
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
         uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}
         run : npm ci
 
       - name: npm test
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
         uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}

@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: Run the Unit Tests 
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+        uses: actions/checkout@v3
+        uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}
-      - run: npm ci
-      - run: npm test
+        run: npm ci
+        run: npm test
 
   publish-gpr:
     needs: build
@@ -30,12 +30,12 @@ jobs:
       packages: write
     steps:
       - name: Publish the package
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+        uses: actions/checkout@v3
+        uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}
           registry-url: https://npm.pkg.github.com/
-      - run: npm ci // as publish-gpr job needs build job
-      - run: npm publish
+        run: npm ci // as publish-gpr job needs build job
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
