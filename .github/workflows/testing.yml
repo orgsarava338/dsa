@@ -16,7 +16,6 @@ jobs:
         machines: [ubuntu-latest]
         node-version : [20.x]
 
-    runs-on: ${{matrix.machines}}
     timeout-minutes: 360
     permissions:
       security-events: write
