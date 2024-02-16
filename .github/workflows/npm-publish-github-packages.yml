@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test:
     runs-on: ${{ matrix.machines }}
 
     strategy:
@@ -26,8 +26,8 @@ jobs:
           npm i
           npm test
 
-  publish-gpr:
-    needs: build
+  publish-npm:
+    needs: test
     runs-on: ${{ matrix.machines }}
 
     strategy:
@@ -45,9 +45,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org/
 
+        
+      - name: Clear npm cache
+        run: npm cache clean --force
 
-      - name: Print current directory
-        run: pwd
+      - name: Update npm
+        run: npm install -g npm@latest
 
       - name: Install dependencies and publish
         run: npm i 
