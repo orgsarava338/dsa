@@ -7,14 +7,13 @@ on:
     branches: [main]
 
 jobs:
+  build:
+    runs-on: ${{ matrix.machines }}
 
-  strategy:
+    strategy:
       matrix:
         machines: [ubuntu-latest]
         node-version: [20.x]
-
-  build:
-    runs-on: ${{ matrix.machines }}
 
     steps:
       - name: Checkout code and setup Node.js
@@ -30,6 +29,12 @@ jobs:
   publish-gpr:
     needs: build
     runs-on: ${{ matrix.machines }}
+
+    strategy:
+      matrix:
+        machines: [ubuntu-latest]
+        node-version: [20.x]
+
     permissions:
       contents: read
       packages: write
