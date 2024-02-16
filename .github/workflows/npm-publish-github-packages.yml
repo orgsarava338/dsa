@@ -48,12 +48,13 @@ jobs:
 
       - name: Print current directory
         run: pwd
-        
+
       - name: Install dependencies and publish
         run: npm i 
+        working-directory: /home/runner/work/dsa/dsa
         
       - name: Publish to the npm packages
         run: npm publish --access public
-        working-directory: /workspaces/dsa
+        working-directory: /home/runner/work/dsa/dsa
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
