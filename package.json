@@ -1,9 +1,12 @@
 {
   "name": "@orgsarava338/dsa",
   "version": "1.0.0",
-  "module": "main.ts",
-  "type": "module",
   "author": "sarava338",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "github.com:orgsarava338/dsa.git"
+  },
   "scripts": {
     "dev": "npx bun --watch main.ts",
     "start": "npx bun main.ts",
