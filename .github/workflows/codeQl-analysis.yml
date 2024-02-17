@@ -3,7 +3,7 @@ name: "CodeQL"
 on:
   pull_request:
     branches: [ "main" ]
-  paths: [ '**.ts', '**.js', 'src/**', 'test/**']
+    paths: [ '**.ts', '**.js', 'src/**', 'test/**']
 
 jobs:
   analyze:
