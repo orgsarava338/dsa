@@ -14,7 +14,7 @@
     "build": ""
   },
   "devDependencies": {
-    "bun": "^1.0.26",
+    "bun": "^1.0.27",
     "bun-types": "latest"
   },
   "peerDependencies": {
