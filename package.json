@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "npx bun --watch main.ts",
     "start": "npx bun main.ts",
-    "test": "npx bun test"
+    "test": "npx bun test",
+    "build": ""
   },
   "devDependencies": {
     "bun": "^1.0.26",
