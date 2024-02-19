@@ -11,7 +11,7 @@
     "dev": "npx bun --watch main.ts",
     "start": "npx bun main.ts",
     "test": "npx bun test",
-    "build": ""
+    "build": "npx bun build ./index.ts --outdir=build"
   },
   "devDependencies": {
     "bun": "^1.0.27",
