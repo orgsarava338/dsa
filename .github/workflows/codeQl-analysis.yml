@@ -1,29 +1,24 @@
-name: CodeQL Analysis
+name: "CodeQL"
 
 on:
   pull_request:
     branches: [ "main" ]
-  # push:
-  #   branches: [ "main" ]
+    paths: [ '**.ts', '**.js', 'src/**', 'test/**']
 
 jobs:
   analyze:
-    name: Analyze
-
+    name: Analyze the Code
+    
     strategy:
       fail-fast: false
       matrix:
-        machines: [ ubuntu-latest ]
-        node-version : [ 20.x ]
-        language: [ javascript-typescript ]
-
-    runs-on: ${{matrix.machines}}
+        language: [ 'javascript-typescript' ]
+        machine: ['ubuntu-latest']
+    
+    runs-on: ${{matrix.machine}}
     timeout-minutes: 360
     permissions:
-      # required for all workflows
       security-events: write
-
-      # only required for workflows in private repositories
       actions: read
       contents: read
 
@@ -31,7 +26,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
