@@ -1,4 +1,4 @@
-import { IDList } from "../Interface";
+import type { IDList } from "../Interface";
 import Node from "./Node";
 
 export default class CircularDoublyLinkedList<T> implements IDList<T> {
