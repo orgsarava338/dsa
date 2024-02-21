@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "author": "sarava338",
   "type": "module",
+  "main": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "github.com:orgsarava338/dsa.git"
@@ -11,7 +12,7 @@
     "dev": "npx bun --watch main.ts",
     "start": "npx bun main.ts",
     "test": "npx bun test",
-    "build": "npx bun build ./index.ts --outdir=build"
+    "build": "npx bun ./scripts/build.ts"
   },
   "devDependencies": {
     "@types/bun": "^1.0.6",
