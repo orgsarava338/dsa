@@ -46,8 +46,8 @@ jobs:
     runs-on: ${{matrix.machine}}
     permissions:
       security-events: write
-      actions: read
-      contents: read
+      actions: write
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -77,8 +77,8 @@ jobs:
     runs-on: ${{matrix.machine}}
     permissions:
       security-events: write
-      actions: read
-      contents: read
+      actions: write
+      contents: write
 
     steps:
       - name: Checkout repository
