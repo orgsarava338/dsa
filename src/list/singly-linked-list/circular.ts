@@ -1,5 +1,5 @@
 import Node from "./Node";
-import { ISList } from "../Interface";
+import type { ISList } from "../Interface";
 
 export default class CircularSinglyLinkedList<T> implements ISList<T> {
   private _head: Node<T> | null;

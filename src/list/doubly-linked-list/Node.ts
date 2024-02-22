@@ -1,4 +1,4 @@
-import { IDNode } from "../Interface";
+import type { IDNode } from "../Interface";
 
 export default class DNode<T> implements IDNode<T> {
   value: T | null;

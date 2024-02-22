@@ -4,9 +4,12 @@ on:
   push: 
     branches: ['main']
     paths: [ '**.ts', '**.js', 'src/**', 'test/**']
+    paths-ignore: [ 'scripts/**.ts' ]
+
   pull_request:
     branches: ['main']
     paths: [ '**.ts', '**.js', 'src/**', 'test/**']
+    paths-ignore: [ 'scripts/*.ts' ]
 
 jobs:
   test:

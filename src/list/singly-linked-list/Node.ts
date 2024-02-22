@@ -1,4 +1,4 @@
-import { ISNode } from "../Interface";
+import type { ISNode } from "../Interface";
 
 export default class SNode<T> implements ISNode<T> {
   value: T | null;

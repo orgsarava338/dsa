@@ -1,4 +1,4 @@
-import IQueue from "./Interface";
+import type IQueue from "./Interface";
 
 export default class Queue<T> implements IQueue<T> {
   private _elements: T[];

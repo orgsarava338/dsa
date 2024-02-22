@@ -1,5 +1,4 @@
-import { toNamespacedPath } from "path";
-import { IDList } from "../Interface";
+import type { IDList } from "../Interface";
 import Node from "./Node";
 
 export default class DoublyLinkedList<T> implements IDList<T> {
