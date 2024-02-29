@@ -97,3 +97,24 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+  publish-jsr:
+    needs: build
+
+    strategy:
+      matrix:
+        node-version: [ '20.x' ]
+        machine: ['ubuntu-latest']
+    
+    runs-on: ${{ strategy.machine }}
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: Publish package to jsr repository - https://jsr.io/@orgsarava338/dsa/
+        run: npx jsr publish
