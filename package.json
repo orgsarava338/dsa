@@ -15,8 +15,8 @@
     "build": "npx bun ./scripts/build.ts"
   },
   "devDependencies": {
-    "@types/bun": "^1.0.6",
-    "bun": "^1.0.27",
+    "@types/bun": "^1.0.7",
+    "bun": "^1.0.29",
     "bun-types": "latest"
   },
   "peerDependencies": {
